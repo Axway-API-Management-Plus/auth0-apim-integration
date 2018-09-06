@@ -1,0 +1,3383 @@
+<entityStoreData xmlns="http://www.vordel.com/2005/06/24/entityStore">
+<metaInfo flags="138">
+	<exportRoots>
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+			</key>
+		</key>
+		<key type='PortalCallbackGroup'>
+			<id field='name' value='Portal Alerts'/>
+			<key type='PortalCallbackGroup'>
+				<id field='name' value='Application Credentials'/>
+				<key type='PortalCallback'>
+					<id field='name' value='Create Application Credential'/>
+				</key>
+			</key>
+		</key>
+		<key type='PortalConfiguration'>
+			<id field='name' value='Portal Config'/>
+		</key>
+		<key type='PortalCallbackGroup'>
+			<id field='name' value='Portal Alerts'/>
+			<key type='PortalCallbackGroup'>
+				<id field='name' value='Application Credentials'/>
+				<key type='PortalCallback'>
+					<id field='name' value='Delete Application Credential'/>
+				</key>
+			</key>
+		</key>
+		<key type='CacheManager'>
+			<id field='name' value='Cache Manager'/>
+			<key type='Cache'>
+				<id field='name' value='JWK-Cache'/>
+			</key>
+		</key>
+		<key type='ESConfiguration'>
+			<id field='name' value='Entity Store Configuration'/>
+		</key>
+		<key type='AuthProfilesGroup'>
+			<id field='name' value='Auth Profiles'/>
+			<key type='OAuthGroup'>
+				<id field='name' value='OAuth2'/>
+				<key type='OAuthProviderProfile'>
+					<id field='name' value='Auth0'/>
+					<key type='OAuthAppProfile'>
+						<id field='name' value='Axway API-Management'/>
+					</key>
+				</key>
+			</key>
+		</key>
+		<key type='PortalCallbackGroup'>
+			<id field='name' value='Portal Alerts'/>
+			<key type='PortalCallbackGroup'>
+				<id field='name' value='Application'/>
+				<key type='PortalCallback'>
+					<id field='name' value='Delete Application'/>
+				</key>
+			</key>
+		</key>
+	</exportRoots>
+	<typeVersions>
+		<type name="AttributeCompare" version="1"/>
+		<type name="AttributeExtractHTTPHeaderFilter" version="0"/>
+		<type name="AuthProfilesGroup" version="0"/>
+		<type name="Cache" version="0"/>
+		<type name="CacheAttributeFilter" version="1"/>
+		<type name="CacheManager" version="2"/>
+		<type name="ChangeMessageFilter" version="0"/>
+		<type name="CircuitContainer" version="1"/>
+		<type name="CircuitDelegateFilter" version="1"/>
+		<type name="CompareAttributeFilter" version="0"/>
+		<type name="ConnectToURLFilter" version="4"/>
+		<type name="ConnectionFilter" version="19"/>
+		<type name="ConversionFilter" version="0"/>
+		<type name="CopyAttribute" version="0"/>
+		<type name="CopyAttributeFilter" version="1"/>
+		<type name="ESConfiguration" version="27"/>
+		<type name="Entity" version="0"/>
+		<type name="Filter" version="5"/>
+		<type name="FilterCircuit" version="4"/>
+		<type name="GetOAuthClientTokenFilter" version="6"/>
+		<type name="IsCachedAttributeFilter" version="1"/>
+		<type name="JSONPath" version="1"/>
+		<type name="JSONPathFilter" version="0"/>
+		<type name="JWTVerifyFilter" version="0"/>
+		<type name="JavaScriptFilter" version="3"/>
+		<type name="LoadableModule" version="2"/>
+		<type name="NamedAuthnProfile" version="0"/>
+		<type name="NamedGroup" version="0"/>
+		<type name="NamedLoadableModule" version="0"/>
+		<type name="NamedTopLevelGroup" version="0"/>
+		<type name="OAuthAppProfile" version="4"/>
+		<type name="OAuthGroup" version="0"/>
+		<type name="OAuthProviderProfile" version="6"/>
+		<type name="PortalApplicationReadFilter" version="0"/>
+		<type name="PortalCallback" version="0"/>
+		<type name="PortalCallbackGroup" version="1"/>
+		<type name="PortalConfiguration" version="33"/>
+		<type name="Property" version="0"/>
+		<type name="RootChild" version="0"/>
+		<type name="SaveToFileFilter" version="2"/>
+		<type name="SetAttributeFilter" version="0"/>
+		<type name="TraceFilter" version="3"/>
+		<type name="TrueFilter" version="0"/>
+	</typeVersions>
+	<realizedTypes><![CDATA[
+<entityStoreData>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="true" extends="Entity" name="RootChild"/>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="true" extends="RootChild" name="LoadableModule">
+        <constant name="_version" type="integer" value="2"/>
+        <constant name="loadorder" type="integer" value="1000000"/>
+        <field cardinality="?" name="classloader" type="^ClassLoader"/>
+
+        </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="true" extends="LoadableModule" name="NamedLoadableModule">
+        <constant name="_version" type="integer" value="0"/>
+		<field cardinality="1" isKey="true" name="name" type="string"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="NamedLoadableModule" name="PortalConfiguration">
+    <constant name="_version" type="integer" value="33"/>
+    <constant name="class" type="string" value="com.vordel.apiportal.config.PortalConfiguration"/>
+    <constant name="loadorder" type="integer" value="5000"/>
+
+    <field cardinality="?" name="smtpServer" type="^SMTPServer"/>
+    <field cardinality="?" name="ldapServer" type="^LdapDirectory"/>
+    <field cardinality="1" name="filterCircuit" type="^FilterCircuit"/>
+
+    <field default="1" name="useEmbedded" type="boolean"/> <!-- if true, ignore "ldapServer", and assume the embedded solution pack is present. -->
+    <field default="cn=apiadmin,ou=organizations,ou=APIPortal" name="adminDN" type="string"/>
+    <field default="ou=organizations,ou=APIPortal" name="organizationRoot" type="string"/>
+    <field default="ou=APIPortal" name="portalRoot" type="string"/>
+    <field default="ou=organizations" name="orgDn" type="string"/>
+    <field default="Community" name="communityName" type="string"/>
+    <field default="apiadmin" name="adminName" type="string"/>
+    <field default="" name="adminPassword" type="encrypted"/>
+    <field default="apiadmin@localhost" name="adminEmail" type="string"/>
+    <field default="0" name="ldapPort" type="integer"/>
+	
+    <field default="" name="latestRestApiVersionUri" type="string"/>
+
+    <field default="AUTO" name="quotaCaching" type="string"/>
+    <field default="30" name="quotaCachingMinWindowSecs" type="integer"/>
+    <field default="ONE" name="quotaReadConsistency" type="string"/>
+    <field default="ONE" name="quotaWriteConsistency" type="string"/>
+	<field default="-1" name="quotaCachingDatabase" type="^DbConnection"/>
+	
+    <field default="600000" name="vapiEventTTLMs" type="long"/>
+	<field default="0" name="vapiPollerInitialDelayMs" type="long"/>
+    <field default="1000" name="vapiPollerPeriodMs" type="long"/>
+	<field default="5000" name="vapiPollerStopWaitMs" type="long"/>
+	<field default="0" name="vapiNotifierCorePoolSize" type="integer"/>
+	<field default="-1" name="vapiNotifierMaxPoolSize" type="integer"/>
+	<field default="60000" name="vapiNotifierKeepAliveMs" type="long"/>
+	<field default="5000" name="vapiNotifierStopWaitMs" type="long"/>
+	<field default="1" name="lifecycleSchedulerCorePoolSize" type="integer"/>
+    <field default="5000" name="lifecycleSchedulerStopWaitMs" type="long"/>
+    <field default="5000" name="asyncExecutorStopWaitMs" type="long"/>
+	
+	<field default="80" name="systemQuotaWarnThresholdPercent" type="integer"/>
+	<field default="80" name="applicationQuotaWarnThresholdPercent" type="integer"/>
+	
+	<field default="false" name="excludeApiDeprecatedHeader" type="boolean"/>
+	<field default="false" name="excludeApiRetireTimeHeader" type="boolean"/>
+	
+	<field default="" name="oauth2Hostname" type="string"/>
+	<field default="" name="oauth2Port" type="string"/>
+	<field default="/api/oauth/authorize" name="oauth2LoginPath" type="string"/>
+	<field default="/api/oauth/authorize" name="oauth2TokenRequestPath" type="string"/>
+	<field default="/api/oauth/token" name="oauth2TokenPath" type="string"/>
+	
+	<field default="false" name="usrprovEnabled" type="boolean"/>
+	<field cardinality="*" name="usrprovAuthNCircuit" type="^FilterCircuit"/>
+	<field cardinality="*" name="usrprovGetUserInfoCircuit" type="^FilterCircuit"/>
+	<field cardinality="*" name="usrprovAccountCreateSuccessCircuit" type="^FilterCircuit"/>
+	<field cardinality="*" name="usrprovAccountCreateFailureCircuit" type="^FilterCircuit"/>
+
+    <field cardinality="*" name="apiregAuthenticationPolicies" type="^FilterCircuit"/>
+    <field cardinality="*" name="apiregGlobalRequestPolicies" type="^FilterCircuit"/>
+    <field cardinality="*" name="apiregGlobalResponsePolicies" type="^FilterCircuit"/>
+    <field cardinality="*" name="apiregRequestPolicies" type="^FilterCircuit"/>
+    <field cardinality="*" name="apiregRoutingPolicies" type="^FilterCircuit"/>
+    <field cardinality="*" name="apiregResponsePolicies" type="^FilterCircuit"/>
+    <field cardinality="*" name="apiregOAuthTokenInfoPolicies" type="^FilterCircuit"/>
+    <field cardinality="*" name="apiregFaultHandlerPolicies" type="^FilterCircuit"/>
+    <field cardinality="1" name="promotionCircuit" type="^FilterCircuit"/>    
+    <field cardinality="*" name="apiregOAuthTokenStores" type="^AccessTokenPersist"/>
+    <field cardinality="*" name="apiregOAuthClientProfiles" type="^OAuthAppProfile"/>
+	
+	<field cardinality="1" default="false" name="metricsStoringEnabled" type="boolean"/>
+	<field cardinality="1" default="-1" name="dbConn" type="^DbConnection"/>
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="NamedLoadableModule" name="CacheManager">
+            <constant name="_version" type="integer" value="2"/>
+            <constant name="class" type="string" value="com.vordel.circuit.cache.CacheContainer"/>
+            <constant name="loadorder" type="integer" value="1"/>
+            <componentType cardinality="*" name="Cache"/>
+        </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="RootChild" name="ESConfiguration">
+        <constant name="_version" type="integer" value="27"/>
+        <!--
+            Give this singleton a key.
+        -->
+        <field isKey="true" name="name" type="string"/>
+        <!-- 
+            We use this field to verify that the passphrase for the 
+            encryped data is synchronized between the server and client, and
+            between multiple invocations of the client
+        -->
+        <field name="passphraseTest" type="encrypted"/>
+        <field name="version" type="string"/>
+        <!-- The product key should never change for the lifetime of the product -->
+        <field name="productKey" type="string"/>
+        <field cardinality="?" name="gitrev" type="string"/>
+    </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="RootChild" name="CircuitContainer">
+    <constant name="_version" type="integer" value="1"/>
+    <componentType cardinality="*" name="FilterCircuit"/>
+    <componentType cardinality="*" name="CircuitContainer"/>
+    <componentType cardinality="*" name="MVProperty"/>
+    <field isKey="true" name="name" type="string"/>
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="RootChild" name="FilterCircuit">
+        <constant name="_version" type="integer" value="4"/>
+		<componentType cardinality="*" name="Filter"/>
+		<componentType cardinality="1" name="BoundCircuit"/>
+		<componentType cardinality="*" name="Property"/>
+		<field cardinality="1" name="start" type="@Filter"/>
+		<field cardinality="?" name="fault" type="@Filter"/>
+		<field isKey="true" name="name" type="string"/>
+		<field cardinality="1" default="3" name="logMask" type="integer"/>
+
+		<field cardinality="?" name="description" type="string"/>		
+		<field cardinality="1" name="category" type="@PolicyCategory">
+            <defaultRef>
+                <key type="PolicyCategoryGroup">
+                  <id field="name" value="Policy Categories"/>
+                  <key type="PolicyCategory">
+                      <id field="name" value="miscellaneous"/>
+                  </key>
+                </key>
+            </defaultRef>
+        </field>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="true" extends="RootChild" name="NamedTopLevelGroup">
+        <constant name="_version" type="integer" value="0"/>
+		<field isKey="true" name="name" type="string"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="NamedTopLevelGroup" name="AuthProfilesGroup"> 
+        <constant name="_version" type="integer" value="0"/>
+	<componentType cardinality="*" name="OAuthGroup"/>
+	<componentType cardinality="*" name="SAMLGroup"/>
+	<componentType cardinality="*" name="ApiKeyGroup"/>
+	<componentType cardinality="*" name="BasicAuthGroup"/>
+	<componentType cardinality="*" name="KerberosGroup"/> 
+	<componentType cardinality="*" name="ApiKeySignerGroup"/> 
+    </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="NamedTopLevelGroup" name="PortalCallbackGroup">
+        <constant name="_version" type="integer" value="1"/>
+		<componentType cardinality="*" name="PortalCallback"/>
+		<componentType cardinality="*" name="PortalCallbackGroup"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="true" extends="Entity" name="NamedGroup">
+        <constant name="_version" type="integer" value="0"/>
+		<field isKey="true" name="name" type="string"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="NamedGroup" name="OAuthGroup">
+    <constant name="_version" type="integer" value="0"/>
+    <componentType cardinality="*" name="OAuthProviderProfile"/>
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Entity" name="OAuthProviderProfile">
+    <constant name="_version" type="integer" value="6"/>
+    <componentType cardinality="*" name="OAuthAppProfile"/>
+    <field cardinality="1" isKey="true" name="name" type="string"/>
+    <field cardinality="1" default="com.vordel.oauth.client.providers.BaseOAuth2Provider" name="class" type="string"/>
+    <field cardinality="1" name="authzUrl" type="string"/>
+    <field cardinality="1" name="tokenUrl" type="string"/>
+    <field cardinality="1" name="tokenStore" type="^ClientAccessTokenPersist"/>
+    <field cardinality="1" name="cacheToUse" type="^Cache">
+      <defaultRef>
+        <key type="CacheManager">
+          <id field="name" value="Cache Manager"/>
+          <key type="Cache">
+            <id field="name" value="OAuth Client State Cache"/>
+          </key>
+        </key>
+      </defaultRef>
+    </field>
+
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="false" extends="Entity" name="Property">
+        <constant name="_version" type="integer" value="0"/>
+		<field isKey="true" name="name" type="string"/>
+		<field name="value" type="string"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Entity" name="Cache">
+        <constant name="_version" type="integer" value="0"/>
+    <!-- required -->
+    <field isKey="true" name="name" type="string"/>
+    <field cardinality="1" default="1000" name="maxElementsInMemory" type="integer"/>
+    <field cardinality="1" default="1000" name="maxElementsOnDisk" type="integer"/>
+    <field cardinality="1" default="true" name="eternal" type="boolean"/>
+    <field cardinality="1" default="true" name="overflowToDisk" type="boolean"/>
+    <!-- optional -->
+    <field cardinality="1" default="0" name="timeToIdleSeconds" type="long"/>
+    <field cardinality="1" default="0" name="timeToLiveSeconds" type="long"/>
+    <field cardinality="1" default="false" name="diskPersistent" type="boolean"/>
+    <field cardinality="1" default="120" name="diskExpiryThreadIntervalSeconds" type="long"/>    
+    <field cardinality="1" default="30" name="diskSpoolBufferSizeMB" type="integer"/>
+    <field cardinality="1" default="LRU" name="memoryStoreEvictionPolicy" type="string"/>
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Entity" name="CopyAttribute">
+        <constant name="_version" type="integer" value="0"/>
+        <!-- Key fields -->
+        <field cardinality="1" isKey="true" name="fromAttributeName" type="string"/>   
+        <field cardinality="1" default="" isKey="true" name="fromAttributeNamespace" type="string"/>   
+        <field cardinality="1" default="" isKey="true" name="toAttributeName" type="string"/>   
+        <field cardinality="1" default="" isKey="true" name="toAttributeNamespace" type="string"/>
+        <!-- Other fields -->    
+        <field cardinality="?" name="attributeValue" type="string"/>
+        <field cardinality="1" default="1" name="fromAttributeLocation" type="integer"/>   
+        <field cardinality="1" default="1" name="toAttributeLocation" type="integer"/>           
+        <field cardinality="1" default="0" name="toListAttribute" type="boolean"/>          
+    </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="false" extends="Entity" name="AttributeCompare">
+      <constant name="_version" type="integer" value="1"/>
+      <field isKey="true" name="attrName" type="string"/>
+      <field default="CONTAINS" isKey="true" name="matchType" type="string"/>
+      <field isKey="true" name="expression" type="string"/>
+    </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="false" extends="Entity" name="JSONPath">
+        <constant name="_version" type="integer" value="1"/>
+        <field name="attributeName" type="string"/>
+        <field isKey="true" name="expression" type="string"/>
+        <field default="java.util.List" name="unmarshalType" type="string"/>
+        <field default="false" name="failOnError" type="boolean"/>
+    </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Entity" name="PortalCallback">
+        <constant name="_version" type="integer" value="0"/>
+		<field isKey="true" name="name" type="string"/>
+		<field name="id" type="string"/>
+		<field name="type" type="string"/>
+		<field name="enabled" type="boolean"/>
+		<field cardinality="?" name="filterCircuit" type="^FilterCircuit"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="true" extends="Entity" name="NamedAuthnProfile">
+    <constant name="_version" type="integer" value="0"/>
+    <field cardinality="1" isKey="true" name="name" type="string"/>
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="NamedAuthnProfile" name="OAuthAppProfile">
+    <constant name="_version" type="integer" value="4"/>
+    <componentType cardinality="?" name="ScopeList"/> 
+    <componentType cardinality="?" name="Property"/> 
+    <componentType cardinality="?" name="AdditionalClaims"/> 
+    <field cardinality="1" name="clientid" type="string"/>
+    <field cardinality="?" name="clientsecret" type="encrypted"/>
+    <field cardinality="1" default="authorization_code" name="oauthFlowType" type="string"/>
+    <field cardinality="1" default="AuthorizationHeader" name="locationOfClientDetails" type="string"/>
+    <field cardinality="1" default="client_id" name="clientIdHeaderName" type="string"/>
+    <field cardinality="1" default="client_secret" name="clientSecretHeaderName" type="string"/>
+    <field cardinality="?" name="jwtSigner" type="^Certificate"/>
+    <field cardinality="?" default="RS256" name="signatureAlg" type="string"/>
+    <field cardinality="?" default="60" name="jwtExpiresIn" type="long"/>
+    <field cardinality="?" name="redirectURL" type="string"/>
+    <field cardinality="?" default="${oauth.resource.owner.id}" name="resourceOwnerId" type="string"/>
+    <field cardinality="1" default="wildcard" name="resourceOwnerPasswordType" type="string"/>
+    <field cardinality="?" default="${oauth.resource.owner.password}" name="resourceOwnerPassword" type="string"/>
+    <field cardinality="?" name="resourceOwnerPasswordPrivate" type="encrypted"/>
+    <!-- Options for assertionType are CreateAssertion/UseAssertion -->
+    <field cardinality="?" default="CreateAssertion" name="assertionType" type="string"/>
+    <field cardinality="?" default="${oauth.saml.assertion}" name="externalAssertion" type="string"/>     
+    <field cardinality="?" name="samlSigner" type="^Certificate"/>
+    <field cardinality="?" default="${authentication.subject.id}" name="samlResourceOwnerId" type="string"/>
+    <field cardinality="1" default="60" name="lifeTime" type="long"/>
+    <field cardinality="1" default="0" name="driftTime" type="long"/>
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="true" extends="Entity" name="Filter">
+        <constant name="_version" type="integer" value="5"/>
+        <field cardinality="?" name="successNode" type="@Filter"/>
+        <field cardinality="?" name="failureNode" type="@Filter"/>
+        <field isKey="true" name="name" type="string"/>
+        <field cardinality="1" default="2" name="logMask" type="integer"/>
+        <field cardinality="1" default="Filter aborted due to exception" name="logFatal" type="string"/>
+        <field cardinality="1" default="Filter failed" name="logFailure" type="string"/>
+        <field cardinality="1" default="Filter passed" name="logSuccess" type="string"/>
+        <field cardinality="1" name="category" type="@Category">
+            <defaultRef>
+                <key type="CategoryGroup">
+                  <id field="name" value="Filter Categories"/>
+                  <key type="Category">
+                      <id field="name" value="miscellaneous"/>
+                  </key>
+                </key>
+            </defaultRef>
+        </field>
+      <field cardinality="1" default="0" name="abortProcessingOnLogError" type="boolean"/>
+      <field cardinality="1" default="SERVICE" name="logMaskType" type="string"/>
+      <field cardinality="*" name="classloader" type="^ClassLoader"/>
+    </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="SetAttributeFilter">
+        <constant name="_version" type="integer" value="0"/>
+  
+    <!-- Name of the Filter class that encapsulates this configuration entity -->
+    <constant name="class" type="string" value="com.vordel.circuit.attribute.SetAttributeFilter"/>
+    
+    <!-- List of the configuration parameters, their types, and their default values -->
+    <field cardinality="1" default="" name="messageAttribute" type="string"/>	
+    <field cardinality="1" default="" name="attributeValue" type="string"/>	
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="SaveToFileFilter">
+		<constant name="_version" type="integer" value="2"/>
+		<constant name="class" type="string" value="com.vordel.circuit.file.SaveToFileFilter"/>
+		<field cardinality="1" default="${id}.out" name="fileName" type="string"/>
+		<field cardinality="1" default="${environment.VINSTDIR}/message-archive" name="directory" type="string"/>
+		<field cardinality="1" default="1000" name="maxFileSize" type="integer"/>
+		<field cardinality="1" default="500" name="maxNumberFiles" type="integer"/>
+		<field cardinality="1" default="0" name="includeHeaders" type="boolean"/>
+		<field cardinality="1" default="0" name="includeRequestLine" type="boolean"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="false" extends="Filter" name="GetOAuthClientTokenFilter">
+    <constant name="_version" type="integer" value="6"/>
+    <constant name="class" type="string" value="com.vordel.circuit.oauth.client.GetOAuthClientTokenFilter"/>
+    <componentType cardinality="1" name="ConnectionFilter"/>
+    <field cardinality="?" name="profile" type="^OAuthAppProfile"/>
+    <field cardinality="?" default="${authentication.subject.id}" name="tokenKey" type="string"/>
+
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="PortalApplicationReadFilter">
+        <constant name="_version" type="integer" value="0"/>
+		<constant name="class" type="string" value="com.vordel.circuit.apiportal.ReadApplicationFilter"/>
+		<field default="${apimgmt.application.id}" name="idSelector" type="string"/>
+		<field default="apimgmt.application" name="targetAttribute" type="string"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="CacheAttributeFilter">
+        <constant name="_version" type="integer" value="1"/>	    
+	    <constant name="class" type="string" value="com.vordel.circuit.cache.CacheAttributeFilter"/>
+        <field cardinality="1" name="cacheToUse" type="^Cache"/>
+	    <field cardinality="1" default="message.key" name="keyAttributeName" type="string"/>
+		<field cardinality="1" default="content.body" name="attributeName" type="string"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="IsCachedAttributeFilter">
+        <constant name="_version" type="integer" value="1"/>	    
+	    <constant name="class" type="string" value="com.vordel.circuit.cache.IsCachedAttributeFilter"/>
+        <field cardinality="1" name="cacheToUse" type="^Cache"/>
+	    <field cardinality="1" default="message.key" name="keyAttributeName" type="string"/>
+		<field cardinality="1" default="content.body" name="attributeName" type="string"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="TrueFilter">
+        <constant name="_version" type="integer" value="0"/>
+		<constant name="class" type="string" value="com.vordel.circuit.basic.True"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="CopyAttributeFilter">
+        <constant name="_version" type="integer" value="1"/>
+        <constant name="class" type="string" value="com.vordel.circuit.attribute.CopyAttributeFilter"/>    
+	    <componentType cardinality="+" name="CopyAttribute"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="CircuitDelegateFilter">
+        <constant name="_version" type="integer" value="1"/>
+		<constant name="class" type="string" value="com.vordel.circuit.CircuitDelegateFilter"/>
+		<field cardinality="?" name="circuitPK" type="^FilterCircuit"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" abstract="true" extends="Filter" name="ConversionFilter">
+        <constant name="_version" type="integer" value="0"/>
+		<field cardinality="?" name="outputContentType" type="string"/> 
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="ConversionFilter" name="ChangeMessageFilter">
+        <constant name="_version" type="integer" value="0"/>
+		<constant name="class" type="string" value="com.vordel.circuit.conversion.ChangeMessageFilter"/>
+		<field cardinality="1" default="" name="body" type="string"/>	
+         </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="AttributeExtractHTTPHeaderFilter">
+        <constant name="_version" type="integer" value="0"/>
+    <constant name="class" type="string" value="com.vordel.circuit.attribute.AttributeExtractHTTPHeaderFilter"/>
+    <field cardinality="1" name="headerName" type="string"/>
+    <field cardinality="1" name="attributeName" type="string"/>
+    <field cardinality="1" default="0" name="base64Decode" type="boolean"/>
+    <field cardinality="1" default="0" name="useQueryParameter" type="boolean"/>
+    <!-- Override the category to give it a different default -->
+    <field cardinality="1" name="category" type="@Category">
+      <defaultRef>
+        <key type="CategoryGroup">
+          <id field="name" value="Filter Categories"/>
+          <key type="Category">
+            <id field="name" value="attribute"/>
+          </key>
+        </key>
+      </defaultRef>
+    </field>    
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="JavaScriptFilter">
+        <constant name="_version" type="integer" value="3"/>
+	<constant name="class" type="string" value="com.vordel.circuit.script.ScriptFilter"/>
+	<field cardinality="1" default="function invoke(msg)         {            return true;         }" name="script" type="string"/>
+	<field cardinality="1" default="nashorn" name="engineName" type="string"/>
+        <field cardinality="*" name="requiredProperties" type="string"/>
+        <field cardinality="*" name="generatedProperties" type="string"/>
+        <field cardinality="*" name="consumedProperties" type="string"/>
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="CompareAttributeFilter">
+        <constant name="_version" type="integer" value="0"/>
+        <constant name="class" type="string" value="com.vordel.circuit.attribute.CompareAttributeFilter"/>
+        <componentType name="AttributeCompare"/>
+        <field default="MATCH_ALL" name="matchingRule" type="string"/>
+    </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="ConnectionFilter">
+    <constant name="_version" type="integer" value="19"/>
+    <constant name="class" type="string" value="com.vordel.circuit.net.ConnectionFilter"/>
+    <componentType cardinality="1" name="SaveToFileFilter"/>
+
+    <!-- Credential profile -->
+    <field cardinality="1" default="false" name="profileInUse" type="boolean"/>
+    <field cardinality="?" default="reference" name="profileType" type="string"/>
+    <field cardinality="?" name="profile" type="^NamedAuthnProfile"/>
+    <field cardinality="?" default="" name="profileSelector" type="string"/>
+
+    <!-- SSL Specific -->
+    <field cardinality="*" name="caCerts" type="^Certificate"/>
+    <field cardinality="*" name="sslUsers" type="^Certificate"/>
+    <field cardinality="1" default="true" name="useRootCerts" type="boolean"/>
+    <field default="FIPS:!SSLv3:!aNULL" name="ciphers" type="string"/> <!-- See OpenSSL "ciphers" manpage -->
+    <!-- set of tokens for advanced SSL options: nosslv2, nosslv3, etc. -->
+    <field cardinality="*" name="ssloptions" type="string">
+        <defaultValue>nosslv2</defaultValue>
+        <defaultValue>nosslv3</defaultValue>
+        <defaultValue>notlsv1</defaultValue>
+        <defaultValue>notlsv1_1</defaultValue>
+    </field>
+
+    <field cardinality="?" default="0" name="sendProxyMode" type="boolean"/>	
+    <field cardinality="?" default="0" name="forwardClientHostHeader" type="boolean"/>
+
+
+    <field cardinality="1" default="false" name="transparentProxy" type="boolean"/>
+    <field cardinality="1" default="false" name="sendReceivedContentHeaders" type="boolean"/>
+    <field cardinality="1" default="true" name="handleRedirects" type="boolean"/>
+    <field cardinality="1" default="false" name="performRetries" type="boolean"/>
+    <field cardinality="*" name="retryHTTPRanges" type="^HTTPStatusClass"/>
+    <field cardinality="1" default="5" name="retryCount" type="string"/>
+    <field cardinality="1" default="500" name="retryLatency" type="string"/>
+    <field cardinality="1" default="false" name="slaBreachAsFailure" type="boolean"/>
+    <field cardinality="1" default="false" name="saveTransactionOnFailure" type="boolean"/>
+    <field cardinality="1" default="false" name="runPolicyOnConnectionFailure" type="boolean"/>
+    <field cardinality="?" name="connectionFailurePolicy" type="^FilterCircuit"/>
+    <field cardinality="?" name="proxyServer" type="^ProxyServer"/>
+    <field cardinality="?" default="0" name="stickyness" type="integer"/>
+    <field cardinality="?" default="unnamed" name="stickyCookieName" type="string"/>
+    <field cardinality="?" default="600000" name="stickyCookieExpiry" type="long"/>
+    <field cardinality="?" default="" name="stickyCookiePath" type="string"/>
+    <field cardinality="?" default="" name="stickyCookieDomain" type="string"/>
+    <field cardinality="?" default="false" name="loadResponseBody" type="boolean"/>
+    <field cardinality="?" default="false" name="closePreviousConnection" type="boolean"/>
+  </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="ConnectionFilter" name="ConnectToURLFilter">
+        <constant name="_version" type="integer" value="4"/>
+		<constant name="class" type="string" value="com.vordel.circuit.net.ConnectToURLFilter"/>
+		<field cardinality="1" default="${http.request.uri}" name="url" type="string"/>	
+		<field cardinality="1" default="${http.request.verb}" name="method" type="string"/>	
+		<field cardinality="1" default="${content.body}" name="body" type="string"/>	
+		<field cardinality="1" default="${http.headers}" name="protoHeaders" type="string"/>	
+	</entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="JSONPathFilter">
+        <constant name="_version" type="integer" value="0"/>
+        <constant name="class" type="string" value="com.vordel.circuit.json.JSONPathFilter"/>
+        <componentType name="JSONPath"/>
+    </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="JWTVerifyFilter">
+    <constant name="_version" type="integer" value="0"/>
+    <constant name="class" type="string" value="com.vordel.circuit.jwt.JWTVerifyFilter"/>
+	<field default="${payload}" name="jwsToken" type="string"/>
+	
+	<field cardinality="1" default="0" name="publicKeyLocation" type="integer"/>
+	<field cardinality="1" name="publicKeyAlias" type="^Certificate"/>
+    <field default="${certificate}" name="publicKeyMsgAttribute" type="string"/>
+	
+	<field cardinality="1" default="0" name="sharedKeySelection" type="integer"/>
+	<field cardinality="1" name="sharedKey" type="encrypted"/>
+	<field cardinality="1" default="${symmetric.key}" name="sharedKeyInMsgAttr" type="string"/>
+	<field default="${jwk}" name="jwkKey" type="string"/>
+	
+	 </entityType>
+<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="TraceFilter">
+        <constant name="_version" type="integer" value="3"/>
+		    <constant name="class" type="string" value="com.vordel.circuit.basic.TraceFilter"/>
+        <field cardinality="?" name="traceMsg" type="string"/>
+        <field cardinality="1" default="5" name="traceLevel" type="integer"/>
+        <field cardinality="1" default="1" name="traceAttributes" type="boolean"/>
+        <field cardinality="1" default="0" name="traceBody" type="boolean"/>
+        <field cardinality="1" default="0" name="doIndent" type="boolean"/>
+    </entityType>
+</entityStoreData>
+	]]></realizedTypes>
+</metaInfo>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CircuitContainer">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+	</key>
+	<fval name="name"><value>Auth0</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="FilterCircuit">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+		</key>
+	</key>
+	<fval name="category"><value contentType="reference">
+		<key type='PolicyCategoryGroup'>
+			<id field='name' value='Policy Categories'/>
+			<key type='PolicyCategory'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="description"><value></value></fval>
+	<fval name="logMask"><value>3</value></fval>
+	<fval name="name"><value>Auth0 - App Deleted</value></fval>
+	<fval name="start"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - App Deleted'/>
+					<key type='GetOAuthClientTokenFilter'>
+						<id field='name' value='Get Auth0 Access Token'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="GetOAuthClientTokenFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - App Deleted'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="name"><value>Get Auth0 Access Token</value></fval>
+	<fval name="profile"><value contentType="reference">
+<key type='AuthProfilesGroup'><id field='name' value='Auth Profiles'/><key type='OAuthGroup'><id field='name' value='OAuth2'/><key type='OAuthProviderProfile'><id field='name' value='Auth0'/><key type='OAuthAppProfile'><id field='name' value='Axway API-Management'/></key></key></key></key>	</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - App Deleted'/>
+					<key type='JavaScriptFilter'>
+						<id field='name' value='Get Auth0-ClientIds for deleted application'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="tokenKey"><value>${authentication.subject.id}</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ConnectionFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - App Deleted'/>
+				<key type='GetOAuthClientTokenFilter'>
+					<id field='name' value='Get Auth0 Access Token'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="caCerts"></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="ciphers"><value>FIPS:!SSLv3:!aNULL</value></fval>
+	<fval name="closePreviousConnection"><value>0</value></fval>
+	<fval name="connectionFailurePolicy"><value contentType="reference">-1</value></fval>
+	<fval name="forwardClientHostHeader"><value>0</value></fval>
+	<fval name="handleRedirects"><value>1</value></fval>
+	<fval name="loadResponseBody"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="name"><value>Connection Details</value></fval>
+	<fval name="performRetries"><value>0</value></fval>
+	<fval name="profileInUse"><value>false</value></fval>
+	<fval name="profileSelector"><value></value></fval>
+	<fval name="profileType"><value>reference</value></fval>
+	<fval name="proxyServer"><value contentType="reference">-1</value></fval>
+	<fval name="retryCount"><value>5</value></fval>
+	<fval name="retryHTTPRanges"><value contentType="reference">-1</value></fval>
+	<fval name="retryLatency"><value>500</value></fval>
+	<fval name="runPolicyOnConnectionFailure"><value>0</value></fval>
+	<fval name="saveTransactionOnFailure"><value>0</value></fval>
+	<fval name="sendProxyMode"><value>0</value></fval>
+	<fval name="sendReceivedContentHeaders"><value>0</value></fval>
+	<fval name="slaBreachAsFailure"><value>0</value></fval>
+	<fval name="sslUsers"><value contentType="reference">-1</value></fval>
+	<fval name="ssloptions">
+		<value>nosslv3</value>
+		<value>notlsv1</value>
+		<value>nosslv2</value>
+		<value>notlsv1_1</value>
+	</fval>
+	<fval name="stickyCookieDomain"><value></value></fval>
+	<fval name="stickyCookieExpiry"><value>600000</value></fval>
+	<fval name="stickyCookieName"><value>unnamed</value></fval>
+	<fval name="stickyCookiePath"><value></value></fval>
+	<fval name="stickyness"><value>0</value></fval>
+	<fval name="transparentProxy"><value>0</value></fval>
+	<fval name="useRootCerts"><value>1</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SaveToFileFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - App Deleted'/>
+				<key type='GetOAuthClientTokenFilter'>
+					<id field='name' value='Get Auth0 Access Token'/>
+					<key type='ConnectionFilter'>
+						<id field='name' value='Connection Details'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="directory"><value>${environment.VINSTDIR}/message-archive</value></fval>
+	<fval name="fileName"><value>${id}.out</value></fval>
+	<fval name="includeHeaders"><value>0</value></fval>
+	<fval name="includeRequestLine"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="maxFileSize"><value>1000</value></fval>
+	<fval name="maxNumberFiles"><value>500</value></fval>
+	<fval name="name"><value>Persistence Details</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JavaScriptFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - App Deleted'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="consumedProperties"></fval>
+	<fval name="engineName"><value>nashorn</value></fval>
+	<fval name="generatedProperties"></fval>
+	<fval name="logFailure"><value>Failed script filter</value></fval>
+	<fval name="logFatal"><value>Error while attempt to run script filter. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Passed script filter</value></fval>
+	<fval name="name"><value>Get Auth0-ClientIds for deleted application</value></fval>
+	<fval name="requiredProperties"></fval>
+	<fval name="script"><value> var imp = new JavaImporter(com.vordel.trace, com.vordel.kps.impl, com.vordel.kps.query, com.vordel.kps, java.util);&#xA; with(imp) {&#xA;&#x9;function invoke(msg) {&#xA;&#x9;&#x9;var applicationId = msg.get(&quot;alert.application.id&quot;);&#xA;&#x9;&#x9;var applicationName = msg.get(&quot;alert.application.name&quot;);&#xA;&#xA;&#x9;&#x9;var kpsTable = KPS.getInstance().getModel().getAliases().get(&quot;auth0appmap&quot;);&#xA;&#x9;&#x9;var transaction = kpsTable.beginTransaction();&#xA;&#x9;&#x9;try {&#xA;&#x9;&#x9;&#x9;var query = new KeyQuery(&quot;applicationId&quot;, applicationId);&#xA;&#x9;&#x9;&#x9;var iterator = transaction.query(query).iterator();&#xA;&#x9;&#x9;} finally {&#xA;&#x9;&#x9;&#x9;transaction.close();&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;var extCredential;&#xA;&#x9;&#x9;var clientIds = new Vector();&#xA;&#x9;&#x9;while(iterator.hasNext()) {&#xA;&#x9;&#x9;&#x9;extCredential = iterator.next();&#xA;&#x9;&#x9;&#x9;//Trace.debug(&quot;Scope: &quot;+appScope.get(&quot;uriprefix&quot;)+&quot; enabled: &quot; + appScope.get(&quot;enabled&quot;));&#xA;&#x9;&#x9;&#x9;clientIds.add(extCredential.get(&quot;auth0ClientId&quot;));&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;Trace.info(&quot;Found Auth0 Client-Ids: &apos;&quot; + clientIds + &quot;&apos;&quot;);&#xA;&#x9;&#x9;msg.put(&quot;clientIds&quot;, clientIds);&#xA;&#x9;&#x9;return true;&#xA;&#x9;}&#xA; };</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - App Deleted'/>
+					<key type='JavaScriptFilter'>
+						<id field='name' value='Delete All Auth0 Client-Apps'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JavaScriptFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - App Deleted'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="consumedProperties"></fval>
+	<fval name="engineName"><value>nashorn</value></fval>
+	<fval name="generatedProperties"></fval>
+	<fval name="logFailure"><value>Failed script filter</value></fval>
+	<fval name="logFatal"><value>Error while attempt to run script filter. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Passed script filter</value></fval>
+	<fval name="name"><value>Delete All Auth0 Client-Apps</value></fval>
+	<fval name="requiredProperties"></fval>
+	<fval name="script"><value>var imp = new JavaImporter(com.vordel.trace, java.util, com.vordel.es.xes, com.vordel.dwe, com.vordel.circuit);&#xA;&#xA;with(imp) {&#xA;    function invoke(msg) {&#xA;&#xA;&#x9;var clientIds = msg.get(&quot;clientIds&quot;);&#xA;&#x9;var espk = PortableESPKFactory.newInstance().createPortableESPK(&#xA;                &quot;&lt;key type=&apos;CircuitContainer&apos;&gt;&lt;id field=&apos;name&apos; value=&apos;Identity Provider&apos;/&gt;&quot;&#xA;                +     &quot;&lt;key type=&apos;CircuitContainer&apos;&gt;&lt;id field=&apos;name&apos; value=&apos;Auth0&apos;/&gt;&quot;&#xA;                +         &quot;&lt;key type=&apos;CircuitContainer&apos;&gt;&lt;id field=&apos;name&apos; value=&apos;lib&apos;/&gt;&quot;&#xA;                +             &quot;&lt;key type=&apos;FilterCircuit&apos;&gt;&lt;id field=&apos;name&apos; value=&apos;Delete Auth0 ClientApp&apos;/&gt;&lt;/key&gt;&quot;&#xA;                +         &quot;&lt;/key&gt;&quot;&#xA;                +     &quot;&lt;/key&gt;&quot;&#xA;                + &quot;&lt;/key&gt;&quot;);&#xA;&#x9;var context = new String(&quot;DefaultContext&quot;);&#xA;&#x9;var deletePolicy = Service.getInstance().getLocalPack().cache.getCircuit(espk);&#xA;&#xA;&#x9;for(var i = 0; i&lt;clientIds.size(); i++) {&#xA;&#x9;&#x9;Trace.debug(&quot;Going to delete client-id: &quot; + clientIds.get(i));&#xA;&#x9;&#x9;msg.put(&quot;auth0ClientId&quot;, clientIds.get(i));&#xA;&#x9;&#x9;InvocationEngine.invokeCircuit(deletePolicy, context, msg);&#xA;&#x9;}&#xA;        return true;&#xA;    }&#xA;};</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="FilterCircuit">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+		</key>
+	</key>
+	<fval name="category"><value contentType="reference">
+		<key type='PolicyCategoryGroup'>
+			<id field='name' value='Policy Categories'/>
+			<key type='PolicyCategory'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="description"><value></value></fval>
+	<fval name="logMask"><value>3</value></fval>
+	<fval name="name"><value>Auth0 - AppCredentials Deleted</value></fval>
+	<fval name="start"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Deleted'/>
+					<key type='TraceFilter'>
+						<id field='name' value='Trace Filter'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="TraceFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Deleted'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="doIndent"><value>0</value></fval>
+	<fval name="logFailure"><value>Failed to trace the message properties</value></fval>
+	<fval name="logFatal"><value>Error while tracing the message properties. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Traced the message properties</value></fval>
+	<fval name="name"><value>Trace Filter</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Deleted'/>
+					<key type='GetOAuthClientTokenFilter'>
+						<id field='name' value='Get Auth0 Access Token'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="traceAttributes"><value>1</value></fval>
+	<fval name="traceBody"><value>0</value></fval>
+	<fval name="traceLevel"><value>3</value></fval>
+	<fval name="traceMsg"><value></value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="GetOAuthClientTokenFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Deleted'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="name"><value>Get Auth0 Access Token</value></fval>
+	<fval name="profile"><value contentType="reference">
+<key type='AuthProfilesGroup'><id field='name' value='Auth Profiles'/><key type='OAuthGroup'><id field='name' value='OAuth2'/><key type='OAuthProviderProfile'><id field='name' value='Auth0'/><key type='OAuthAppProfile'><id field='name' value='Axway API-Management'/></key></key></key></key>	</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Deleted'/>
+					<key type='ConnectToURLFilter'>
+						<id field='name' value='Delete Auth0 Client'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="tokenKey"><value>${authentication.subject.id}</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ConnectionFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Deleted'/>
+				<key type='GetOAuthClientTokenFilter'>
+					<id field='name' value='Get Auth0 Access Token'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="caCerts"></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="ciphers"><value>FIPS:!SSLv3:!aNULL</value></fval>
+	<fval name="closePreviousConnection"><value>0</value></fval>
+	<fval name="connectionFailurePolicy"><value contentType="reference">-1</value></fval>
+	<fval name="forwardClientHostHeader"><value>0</value></fval>
+	<fval name="handleRedirects"><value>1</value></fval>
+	<fval name="loadResponseBody"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="name"><value>Connection Details</value></fval>
+	<fval name="performRetries"><value>0</value></fval>
+	<fval name="profileInUse"><value>false</value></fval>
+	<fval name="profileSelector"><value></value></fval>
+	<fval name="profileType"><value>reference</value></fval>
+	<fval name="proxyServer"><value contentType="reference">-1</value></fval>
+	<fval name="retryCount"><value>5</value></fval>
+	<fval name="retryHTTPRanges"><value contentType="reference">-1</value></fval>
+	<fval name="retryLatency"><value>500</value></fval>
+	<fval name="runPolicyOnConnectionFailure"><value>0</value></fval>
+	<fval name="saveTransactionOnFailure"><value>0</value></fval>
+	<fval name="sendProxyMode"><value>0</value></fval>
+	<fval name="sendReceivedContentHeaders"><value>0</value></fval>
+	<fval name="slaBreachAsFailure"><value>0</value></fval>
+	<fval name="sslUsers"><value contentType="reference">-1</value></fval>
+	<fval name="ssloptions">
+		<value>nosslv3</value>
+		<value>notlsv1</value>
+		<value>nosslv2</value>
+		<value>notlsv1_1</value>
+	</fval>
+	<fval name="stickyCookieDomain"><value></value></fval>
+	<fval name="stickyCookieExpiry"><value>600000</value></fval>
+	<fval name="stickyCookieName"><value>unnamed</value></fval>
+	<fval name="stickyCookiePath"><value></value></fval>
+	<fval name="stickyness"><value>0</value></fval>
+	<fval name="transparentProxy"><value>0</value></fval>
+	<fval name="useRootCerts"><value>1</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SaveToFileFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Deleted'/>
+				<key type='GetOAuthClientTokenFilter'>
+					<id field='name' value='Get Auth0 Access Token'/>
+					<key type='ConnectionFilter'>
+						<id field='name' value='Connection Details'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="directory"><value>${environment.VINSTDIR}/message-archive</value></fval>
+	<fval name="fileName"><value>${id}.out</value></fval>
+	<fval name="includeHeaders"><value>0</value></fval>
+	<fval name="includeRequestLine"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="maxFileSize"><value>1000</value></fval>
+	<fval name="maxNumberFiles"><value>500</value></fval>
+	<fval name="name"><value>Persistence Details</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ConnectToURLFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Deleted'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="body"><value>${content.body}</value></fval>
+	<fval name="caCerts"></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="ciphers"><value>FIPS:!SSLv3:!aNULL</value></fval>
+	<fval name="closePreviousConnection"><value>0</value></fval>
+	<fval name="connectionFailurePolicy"><value contentType="reference">-1</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="forwardClientHostHeader"><value>0</value></fval>
+	<fval name="handleRedirects"><value>1</value></fval>
+	<fval name="loadResponseBody"><value>0</value></fval>
+	<fval name="logFailure"><value>Failed to route request to endpoint.</value></fval>
+	<fval name="logFatal"><value>Error occurred while routing request to endpoint. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Successfully routed request to endpoint</value></fval>
+	<fval name="method"><value>DELETE</value></fval>
+	<fval name="name"><value>Delete Auth0 Client</value></fval>
+	<fval name="performRetries"><value>0</value></fval>
+	<fval name="profile"><value contentType="reference">
+<key type='AuthProfilesGroup'><id field='name' value='Auth Profiles'/><key type='OAuthGroup'><id field='name' value='OAuth2'/><key type='OAuthProviderProfile'><id field='name' value='Auth0'/><key type='OAuthAppProfile'><id field='name' value='Axway API-Management'/></key></key></key></key>	</value></fval>
+	<fval name="profileInUse"><value>1</value></fval>
+	<fval name="profileSelector"><value></value></fval>
+	<fval name="profileType"><value>reference</value></fval>
+	<fval name="protoHeaders"><value>${http.headers}</value></fval>
+	<fval name="proxyServer"><value contentType="reference">-1</value></fval>
+	<fval name="retryCount"><value>5</value></fval>
+	<fval name="retryHTTPRanges"><value contentType="reference">-1</value></fval>
+	<fval name="retryLatency"><value>500</value></fval>
+	<fval name="runPolicyOnConnectionFailure"><value>0</value></fval>
+	<fval name="saveTransactionOnFailure"><value>0</value></fval>
+	<fval name="sendProxyMode"><value>0</value></fval>
+	<fval name="sendReceivedContentHeaders"><value>0</value></fval>
+	<fval name="slaBreachAsFailure"><value>0</value></fval>
+	<fval name="sslUsers"><value contentType="reference">-1</value></fval>
+	<fval name="ssloptions">
+		<value>nosslv3</value>
+		<value>notlsv1</value>
+		<value>nosslv2</value>
+		<value>notlsv1_1</value>
+	</fval>
+	<fval name="stickyCookieDomain"><value></value></fval>
+	<fval name="stickyCookieExpiry"><value>600000</value></fval>
+	<fval name="stickyCookieName"><value>unnamed</value></fval>
+	<fval name="stickyCookiePath"><value></value></fval>
+	<fval name="stickyness"><value>0</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Deleted'/>
+					<key type='SetAttributeFilter'>
+						<id field='name' value='Set auth0ClientId'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="transparentProxy"><value>0</value></fval>
+	<fval name="url"><value>https://${env.auth0_domain}/api/v2/clients/${alert.appcredential.externalclient.clientId}</value></fval>
+	<fval name="useRootCerts"><value>1</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SaveToFileFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Deleted'/>
+				<key type='ConnectToURLFilter'>
+					<id field='name' value='Delete Auth0 Client'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="directory"><value>${environment.VINSTDIR}/message-archive</value></fval>
+	<fval name="fileName"><value>${id}.out</value></fval>
+	<fval name="includeHeaders"><value>0</value></fval>
+	<fval name="includeRequestLine"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="maxFileSize"><value>1000</value></fval>
+	<fval name="maxNumberFiles"><value>500</value></fval>
+	<fval name="name"><value>Persistence Details</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CircuitDelegateFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Deleted'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="circuitPK"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Identity Provider'/><key type='CircuitContainer'><id field='name' value='Auth0'/><key type='CircuitContainer'><id field='name' value='lib'/><key type='FilterCircuit'><id field='name' value='Delete ClientAppMap entry'/></key></key></key></key>	</value></fval>
+	<fval name="logFailure"><value>Failed in calling policy shortcut</value></fval>
+	<fval name="logFatal"><value>Error in calling policy shortcut circuit. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Success in calling policy shortcut</value></fval>
+	<fval name="name"><value>Call &apos;Delete ClientAppMap entry&apos;</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SetAttributeFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Deleted'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="attributeValue"><value>${alert.appcredential.externalclient.clientId}</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="logFailure"><value>Failed to set the attribute value</value></fval>
+	<fval name="logFatal"><value>Error while setting the attribute value. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Set the attribute value</value></fval>
+	<fval name="messageAttribute"><value>auth0ClientId</value></fval>
+	<fval name="name"><value>Set auth0ClientId</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Deleted'/>
+					<key type='CircuitDelegateFilter'>
+						<id field='name' value='Call &apos;Delete ClientAppMap entry&apos;'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CircuitContainer">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+		</key>
+	</key>
+	<fval name="name"><value>lib</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="FilterCircuit">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+			</key>
+		</key>
+	</key>
+	<fval name="category"><value contentType="reference">
+		<key type='PolicyCategoryGroup'>
+			<id field='name' value='Policy Categories'/>
+			<key type='PolicyCategory'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="description"><value></value></fval>
+	<fval name="logMask"><value>3</value></fval>
+	<fval name="name"><value>Delete ClientAppMap entry</value></fval>
+	<fval name="start"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='CircuitContainer'>
+					<id field='name' value='lib'/>
+					<key type='FilterCircuit'>
+						<id field='name' value='Delete ClientAppMap entry'/>
+						<key type='JavaScriptFilter'>
+							<id field='name' value='Delete ClientId to API-MgrApp Map'/>
+						</key>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JavaScriptFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Delete ClientAppMap entry'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="consumedProperties"></fval>
+	<fval name="engineName"><value>nashorn</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="generatedProperties"></fval>
+	<fval name="logFailure"><value>Failed script filter</value></fval>
+	<fval name="logFatal"><value>Error while attempt to run script filter. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Passed script filter</value></fval>
+	<fval name="name"><value>Delete ClientId to API-MgrApp Map</value></fval>
+	<fval name="requiredProperties"></fval>
+	<fval name="script"><value>var imp = new JavaImporter(com.vordel.trace, com.vordel.kps.impl, java.util);&#xA;&#xA;with(imp) {&#xA;    function invoke(msg) {&#xA;&#xA;&#x9;var auth0ClientId = msg.get(&quot;auth0ClientId&quot;);&#xA;&#xA;&#x9;var kpsTable = KPS.getInstance().getModel().getAliases().get(&quot;auth0appmap&quot;);&#xA;&#x9;var transaction = kpsTable.beginTransaction();&#xA;&#xA;&#x9;try {&#xA;&#x9;&#x9;transaction.delete(auth0ClientId);&#xA;&#x9;} catch (e) {&#xA;&#x9;&#x9;Trace.error(&quot;Error deleting map to Auth0-ClientId: &quot; + auth0ClientId + &quot;&quot;);&#xA;&#x9;&#x9;Trace.error(e.getMessage());&#xA;&#x9;&#x9;return false;&#xA;&#x9;} finally {&#xA;&#x9;&#x9;transaction.close();&#xA;&#x9;}&#xA;&#x9;Trace.debug(&quot;Successfully deleted map of Auth0-ClientId: &quot; + auth0ClientId + &quot;&quot;);&#xA;        return true;&#xA;    }&#xA;};</value></fval>
+	<fval name="successNode"><value contentType="reference">-1</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="FilterCircuit">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+			</key>
+		</key>
+	</key>
+	<fval name="category"><value contentType="reference">
+		<key type='PolicyCategoryGroup'>
+			<id field='name' value='Policy Categories'/>
+			<key type='PolicyCategory'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="description"><value></value></fval>
+	<fval name="logMask"><value>3</value></fval>
+	<fval name="name"><value>Delete Auth0 ClientApp</value></fval>
+	<fval name="start"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='CircuitContainer'>
+					<id field='name' value='lib'/>
+					<key type='FilterCircuit'>
+						<id field='name' value='Delete Auth0 ClientApp'/>
+						<key type='ConnectToURLFilter'>
+							<id field='name' value='Delete Auth0 client app'/>
+						</key>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ConnectToURLFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Delete Auth0 ClientApp'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="body"><value>${content.body}</value></fval>
+	<fval name="caCerts"></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="ciphers"><value>FIPS:!SSLv3:!aNULL</value></fval>
+	<fval name="closePreviousConnection"><value>0</value></fval>
+	<fval name="connectionFailurePolicy"><value contentType="reference">-1</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="forwardClientHostHeader"><value>0</value></fval>
+	<fval name="handleRedirects"><value>1</value></fval>
+	<fval name="loadResponseBody"><value>0</value></fval>
+	<fval name="logFailure"><value>Failed to route request to endpoint.</value></fval>
+	<fval name="logFatal"><value>Error occurred while routing request to endpoint. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Successfully routed request to endpoint</value></fval>
+	<fval name="method"><value>DELETE</value></fval>
+	<fval name="name"><value>Delete Auth0 client app</value></fval>
+	<fval name="performRetries"><value>0</value></fval>
+	<fval name="profile"><value contentType="reference">
+<key type='AuthProfilesGroup'><id field='name' value='Auth Profiles'/><key type='OAuthGroup'><id field='name' value='OAuth2'/><key type='OAuthProviderProfile'><id field='name' value='Auth0'/><key type='OAuthAppProfile'><id field='name' value='Axway API-Management'/></key></key></key></key>	</value></fval>
+	<fval name="profileInUse"><value>1</value></fval>
+	<fval name="profileSelector"><value></value></fval>
+	<fval name="profileType"><value>reference</value></fval>
+	<fval name="protoHeaders"><value>${http.headers}</value></fval>
+	<fval name="proxyServer"><value contentType="reference">-1</value></fval>
+	<fval name="retryCount"><value>5</value></fval>
+	<fval name="retryHTTPRanges"><value contentType="reference">-1</value></fval>
+	<fval name="retryLatency"><value>500</value></fval>
+	<fval name="runPolicyOnConnectionFailure"><value>0</value></fval>
+	<fval name="saveTransactionOnFailure"><value>0</value></fval>
+	<fval name="sendProxyMode"><value>0</value></fval>
+	<fval name="sendReceivedContentHeaders"><value>0</value></fval>
+	<fval name="slaBreachAsFailure"><value>0</value></fval>
+	<fval name="sslUsers"><value contentType="reference">-1</value></fval>
+	<fval name="ssloptions">
+		<value>nosslv3</value>
+		<value>notlsv1</value>
+		<value>nosslv2</value>
+		<value>notlsv1_1</value>
+	</fval>
+	<fval name="stickyCookieDomain"><value></value></fval>
+	<fval name="stickyCookieExpiry"><value>600000</value></fval>
+	<fval name="stickyCookieName"><value>unnamed</value></fval>
+	<fval name="stickyCookiePath"><value></value></fval>
+	<fval name="stickyness"><value>0</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='CircuitContainer'>
+					<id field='name' value='lib'/>
+					<key type='FilterCircuit'>
+						<id field='name' value='Delete Auth0 ClientApp'/>
+						<key type='CircuitDelegateFilter'>
+							<id field='name' value='Call &apos;Delete ClientAppMap entry&apos;'/>
+						</key>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="transparentProxy"><value>0</value></fval>
+	<fval name="url"><value>https://${env.auth0_domain}/api/v2/clients/${auth0ClientId}</value></fval>
+	<fval name="useRootCerts"><value>1</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SaveToFileFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Delete Auth0 ClientApp'/>
+					<key type='ConnectToURLFilter'>
+						<id field='name' value='Delete Auth0 client app'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="directory"><value>${environment.VINSTDIR}/message-archive</value></fval>
+	<fval name="fileName"><value>${id}.out</value></fval>
+	<fval name="includeHeaders"><value>0</value></fval>
+	<fval name="includeRequestLine"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="maxFileSize"><value>1000</value></fval>
+	<fval name="maxNumberFiles"><value>500</value></fval>
+	<fval name="name"><value>Persistence Details</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CircuitDelegateFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Delete Auth0 ClientApp'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="circuitPK"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Identity Provider'/><key type='CircuitContainer'><id field='name' value='Auth0'/><key type='CircuitContainer'><id field='name' value='lib'/><key type='FilterCircuit'><id field='name' value='Delete ClientAppMap entry'/></key></key></key></key>	</value></fval>
+	<fval name="logFailure"><value>Failed in calling policy shortcut</value></fval>
+	<fval name="logFatal"><value>Error in calling policy shortcut circuit. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Success in calling policy shortcut</value></fval>
+	<fval name="name"><value>Call &apos;Delete ClientAppMap entry&apos;</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="FilterCircuit">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+			</key>
+		</key>
+	</key>
+	<fval name="category"><value contentType="reference">
+		<key type='PolicyCategoryGroup'>
+			<id field='name' value='Policy Categories'/>
+			<key type='PolicyCategory'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="description"><value></value></fval>
+	<fval name="logMask"><value>3</value></fval>
+	<fval name="name"><value>Get JWK</value></fval>
+	<fval name="start"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='CircuitContainer'>
+					<id field='name' value='lib'/>
+					<key type='FilterCircuit'>
+						<id field='name' value='Get JWK'/>
+						<key type='SetAttributeFilter'>
+							<id field='name' value='Set JWK Location'/>
+						</key>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ConnectToURLFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Get JWK'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="body"><value>${content.body}</value></fval>
+	<fval name="caCerts"></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="ciphers"><value>FIPS:!SSLv3:!aNULL</value></fval>
+	<fval name="closePreviousConnection"><value>0</value></fval>
+	<fval name="connectionFailurePolicy"><value contentType="reference">-1</value></fval>
+	<fval name="forwardClientHostHeader"><value>0</value></fval>
+	<fval name="handleRedirects"><value>1</value></fval>
+	<fval name="loadResponseBody"><value>0</value></fval>
+	<fval name="logFailure"><value>Failed to route request to endpoint.</value></fval>
+	<fval name="logFatal"><value>Error occurred while routing request to endpoint. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Successfully routed request to endpoint</value></fval>
+	<fval name="method"><value>${http.request.verb}</value></fval>
+	<fval name="name"><value>Get JWK</value></fval>
+	<fval name="performRetries"><value>0</value></fval>
+	<fval name="profile"><value contentType="reference">-1</value></fval>
+	<fval name="profileInUse"><value>0</value></fval>
+	<fval name="profileSelector"><value></value></fval>
+	<fval name="profileType"><value>reference</value></fval>
+	<fval name="protoHeaders"><value>${http.headers}</value></fval>
+	<fval name="proxyServer"><value contentType="reference">-1</value></fval>
+	<fval name="retryCount"><value>5</value></fval>
+	<fval name="retryHTTPRanges"><value contentType="reference">-1</value></fval>
+	<fval name="retryLatency"><value>500</value></fval>
+	<fval name="runPolicyOnConnectionFailure"><value>0</value></fval>
+	<fval name="saveTransactionOnFailure"><value>0</value></fval>
+	<fval name="sendProxyMode"><value>0</value></fval>
+	<fval name="sendReceivedContentHeaders"><value>0</value></fval>
+	<fval name="slaBreachAsFailure"><value>0</value></fval>
+	<fval name="sslUsers"><value contentType="reference">-1</value></fval>
+	<fval name="ssloptions">
+		<value>nosslv3</value>
+		<value>notlsv1</value>
+		<value>nosslv2</value>
+		<value>notlsv1_1</value>
+	</fval>
+	<fval name="stickyCookieDomain"><value></value></fval>
+	<fval name="stickyCookieExpiry"><value>600000</value></fval>
+	<fval name="stickyCookieName"><value>unnamed</value></fval>
+	<fval name="stickyCookiePath"><value></value></fval>
+	<fval name="stickyness"><value>0</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='CircuitContainer'>
+					<id field='name' value='lib'/>
+					<key type='FilterCircuit'>
+						<id field='name' value='Get JWK'/>
+						<key type='SetAttributeFilter'>
+							<id field='name' value='Set JWK'/>
+						</key>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="transparentProxy"><value>0</value></fval>
+	<fval name="url"><value>${jwkURL}</value></fval>
+	<fval name="useRootCerts"><value>1</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SaveToFileFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Get JWK'/>
+					<key type='ConnectToURLFilter'>
+						<id field='name' value='Get JWK'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="directory"><value>${environment.VINSTDIR}/message-archive</value></fval>
+	<fval name="fileName"><value>${id}.out</value></fval>
+	<fval name="includeHeaders"><value>0</value></fval>
+	<fval name="includeRequestLine"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="maxFileSize"><value>1000</value></fval>
+	<fval name="maxNumberFiles"><value>500</value></fval>
+	<fval name="name"><value>Persistence Details</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SetAttributeFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Get JWK'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="attributeValue"><value>${content.body}</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="logFailure"><value>Failed to set the attribute value</value></fval>
+	<fval name="logFatal"><value>Error while setting the attribute value. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Set the attribute value</value></fval>
+	<fval name="messageAttribute"><value>jwk</value></fval>
+	<fval name="name"><value>Set JWK</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='CircuitContainer'>
+					<id field='name' value='lib'/>
+					<key type='FilterCircuit'>
+						<id field='name' value='Get JWK'/>
+						<key type='CacheAttributeFilter'>
+							<id field='name' value='Cache JWK'/>
+						</key>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="IsCachedAttributeFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Get JWK'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="attributeName"><value>jwk</value></fval>
+	<fval name="cacheToUse"><value contentType="reference">
+<key type='CacheManager'><id field='name' value='Cache Manager'/><key type='Cache'><id field='name' value='JWK-Cache'/></key></key>	</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="failureNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='CircuitContainer'>
+					<id field='name' value='lib'/>
+					<key type='FilterCircuit'>
+						<id field='name' value='Get JWK'/>
+						<key type='ConnectToURLFilter'>
+							<id field='name' value='Get JWK'/>
+						</key>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="keyAttributeName"><value>jwkURL</value></fval>
+	<fval name="logFailure"><value>Failure while looking for key in the message attribute cache.</value></fval>
+	<fval name="logFatal"><value>Error while looking for key in the  message attribiute cache. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Found the key in the message attribute cache.</value></fval>
+	<fval name="name"><value>Is JWK cached?</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='CircuitContainer'>
+					<id field='name' value='lib'/>
+					<key type='FilterCircuit'>
+						<id field='name' value='Get JWK'/>
+						<key type='TrueFilter'>
+							<id field='name' value='True Filter'/>
+						</key>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SetAttributeFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Get JWK'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="attributeValue"><value>https://test-axway.eu.auth0.com/.well-known/jwks.json</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="logFailure"><value>Failed to set the attribute value</value></fval>
+	<fval name="logFatal"><value>Error while setting the attribute value. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Set the attribute value</value></fval>
+	<fval name="messageAttribute"><value>jwkURL</value></fval>
+	<fval name="name"><value>Set JWK Location</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='CircuitContainer'>
+					<id field='name' value='lib'/>
+					<key type='FilterCircuit'>
+						<id field='name' value='Get JWK'/>
+						<key type='IsCachedAttributeFilter'>
+							<id field='name' value='Is JWK cached?'/>
+						</key>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CacheAttributeFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Get JWK'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="attributeName"><value>jwk</value></fval>
+	<fval name="cacheToUse"><value contentType="reference">
+<key type='CacheManager'><id field='name' value='Cache Manager'/><key type='Cache'><id field='name' value='JWK-Cache'/></key></key>	</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="keyAttributeName"><value>jwkURL</value></fval>
+	<fval name="logFailure"><value>Failed to cache the message attribute.</value></fval>
+	<fval name="logFatal"><value>Error while caching the message attribute. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Cached the message attribute.</value></fval>
+	<fval name="name"><value>Cache JWK</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="TrueFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='lib'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Get JWK'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="logFailure"><value></value></fval>
+	<fval name="logFatal"><value>True filter error. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>True filter passed</value></fval>
+	<fval name="name"><value>True Filter</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="FilterCircuit">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+		</key>
+	</key>
+	<fval name="category"><value contentType="reference">
+		<key type='PolicyCategoryGroup'>
+			<id field='name' value='Policy Categories'/>
+			<key type='PolicyCategory'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="description"><value></value></fval>
+	<fval name="logMask"><value>3</value></fval>
+	<fval name="name"><value>Auth0 - AppCredentials Created</value></fval>
+	<fval name="start"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Created'/>
+					<key type='GetOAuthClientTokenFilter'>
+						<id field='name' value='Get Auth0 Access Token'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="PortalApplicationReadFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="idSelector"><value>${alert.appcredential.externalclient.applicationId}</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="name"><value>Read Application</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Created'/>
+					<key type='ChangeMessageFilter'>
+						<id field='name' value='Create OAuth-ClientId'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="targetAttribute"><value>apimgmt.application</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ChangeMessageFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="body"><value>{&#xA;&#x9;&quot;name&quot;: &quot;${apimgmt.application.name}&quot;, &#xA;&#x9;&quot;grant_types&quot;: [&quot;client_credentials&quot;, &quot;implicit&quot;, &quot;authorization_code&quot;, &quot;password&quot;]&#xA;}</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="logFailure"><value>Failed in setting the message</value></fval>
+	<fval name="logFatal"><value>Error in setting the message. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Success in setting the message</value></fval>
+	<fval name="name"><value>Create OAuth-ClientId</value></fval>
+	<fval name="outputContentType"><value>application/json</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Created'/>
+					<key type='ConnectToURLFilter'>
+						<id field='name' value='Create Auth0 App'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CompareAttributeFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="matchingRule"><value>MATCH_ALL</value></fval>
+	<fval name="name"><value>Check HTTP-Status code - 1</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Created'/>
+					<key type='JSONPathFilter'>
+						<id field='name' value='Get ClientIdDetails'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="AttributeCompare">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+				<key type='CompareAttributeFilter'>
+					<id field='name' value='Check HTTP-Status code - 1'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="attrName"><value>http.response.status</value></fval>
+	<fval name="expression"><value>2</value></fval>
+	<fval name="matchType"><value>BEGINS_WITH</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JSONPathFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="name"><value>Get ClientIdDetails</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Created'/>
+					<key type='JavaScriptFilter'>
+						<id field='name' value='Store Auth0 ClientId'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JSONPath">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+				<key type='JSONPathFilter'>
+					<id field='name' value='Get ClientIdDetails'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="attributeName"><value>auth0ClientId</value></fval>
+	<fval name="expression"><value>$.client_id</value></fval>
+	<fval name="failOnError"><value>1</value></fval>
+	<fval name="unmarshalType"><value>java.lang.String</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JavaScriptFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="consumedProperties"></fval>
+	<fval name="engineName"><value>nashorn</value></fval>
+	<fval name="generatedProperties"></fval>
+	<fval name="logFailure"><value>Failed script filter</value></fval>
+	<fval name="logFatal"><value>Error while attempt to run script filter. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Passed script filter</value></fval>
+	<fval name="name"><value>Store Auth0 ClientId</value></fval>
+	<fval name="requiredProperties"></fval>
+	<fval name="script"><value>var imp = new JavaImporter(com.vordel.trace, com.vordel.kps.impl);&#xA;with(imp) {&#xD;&#xA;&#xD;&#xA;function invoke(msg)&#xD;&#xA;{&#xA;&#x9;var auth0ClientId = msg.get(&quot;auth0ClientId&quot;);&#xA;&#x9;var externalClientId = msg.get(&quot;alert.appcredential.externalclient.id&quot;);&#xA;&#xD;&#xA;&#x9;// get the KPS table with alias &quot;accessKeyTable&quot;&#xD;&#xA;&#x9;var kpsTable = KPS.getInstance().getModel().getAliases().get(&quot;PortalExternalClientStore&quot;);&#xD;&#xA;&#x9;// Get the generated external ClientId row&#xD;&#xA;&#x9;var extClientIdRecord = kpsTable.getCached(externalClientId);&#xD;&#xA;&#x9;// Replace given ClientId with the Auth0 ClientId&#xD;&#xA;&#x9;extClientIdRecord.put(&quot;clientId&quot;, auth0ClientId);&#xD;&#xA;&#xA;&#x9;kpsTable.update(extClientIdRecord);&#xD;&#xA;&#x9;Trace.info(&quot;Successfully saved Auth0-Client-Id: &quot; + auth0ClientId);&#xD;&#xA;&#xD;&#xA;&#x9;return true;&#xD;&#xA;}&#xA;&#xA;}&#xD;&#xA;&#xD;&#xA;</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Created'/>
+					<key type='JavaScriptFilter'>
+						<id field='name' value='Map Auth0 Client to API-Mgr app'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="GetOAuthClientTokenFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="name"><value>Get Auth0 Access Token</value></fval>
+	<fval name="profile"><value contentType="reference">
+<key type='AuthProfilesGroup'><id field='name' value='Auth Profiles'/><key type='OAuthGroup'><id field='name' value='OAuth2'/><key type='OAuthProviderProfile'><id field='name' value='Auth0'/><key type='OAuthAppProfile'><id field='name' value='Axway API-Management'/></key></key></key></key>	</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Created'/>
+					<key type='PortalApplicationReadFilter'>
+						<id field='name' value='Read Application'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="tokenKey"><value>${authentication.subject.id}</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ConnectionFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+				<key type='GetOAuthClientTokenFilter'>
+					<id field='name' value='Get Auth0 Access Token'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="caCerts"></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="ciphers"><value>FIPS:!SSLv3:!aNULL</value></fval>
+	<fval name="closePreviousConnection"><value>0</value></fval>
+	<fval name="connectionFailurePolicy"><value contentType="reference">-1</value></fval>
+	<fval name="forwardClientHostHeader"><value>0</value></fval>
+	<fval name="handleRedirects"><value>1</value></fval>
+	<fval name="loadResponseBody"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="name"><value>Connection Details</value></fval>
+	<fval name="performRetries"><value>0</value></fval>
+	<fval name="profileInUse"><value>false</value></fval>
+	<fval name="profileSelector"><value></value></fval>
+	<fval name="profileType"><value>reference</value></fval>
+	<fval name="proxyServer"><value contentType="reference">-1</value></fval>
+	<fval name="retryCount"><value>5</value></fval>
+	<fval name="retryHTTPRanges"><value contentType="reference">-1</value></fval>
+	<fval name="retryLatency"><value>500</value></fval>
+	<fval name="runPolicyOnConnectionFailure"><value>0</value></fval>
+	<fval name="saveTransactionOnFailure"><value>0</value></fval>
+	<fval name="sendProxyMode"><value>0</value></fval>
+	<fval name="sendReceivedContentHeaders"><value>0</value></fval>
+	<fval name="slaBreachAsFailure"><value>0</value></fval>
+	<fval name="sslUsers"><value contentType="reference">-1</value></fval>
+	<fval name="ssloptions">
+		<value>nosslv3</value>
+		<value>notlsv1</value>
+		<value>nosslv2</value>
+		<value>notlsv1_1</value>
+	</fval>
+	<fval name="stickyCookieDomain"><value></value></fval>
+	<fval name="stickyCookieExpiry"><value>600000</value></fval>
+	<fval name="stickyCookieName"><value>unnamed</value></fval>
+	<fval name="stickyCookiePath"><value></value></fval>
+	<fval name="stickyness"><value>0</value></fval>
+	<fval name="transparentProxy"><value>0</value></fval>
+	<fval name="useRootCerts"><value>1</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SaveToFileFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+				<key type='GetOAuthClientTokenFilter'>
+					<id field='name' value='Get Auth0 Access Token'/>
+					<key type='ConnectionFilter'>
+						<id field='name' value='Connection Details'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="directory"><value>${environment.VINSTDIR}/message-archive</value></fval>
+	<fval name="fileName"><value>${id}.out</value></fval>
+	<fval name="includeHeaders"><value>0</value></fval>
+	<fval name="includeRequestLine"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="maxFileSize"><value>1000</value></fval>
+	<fval name="maxNumberFiles"><value>500</value></fval>
+	<fval name="name"><value>Persistence Details</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ConnectToURLFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="body"><value>${content.body}</value></fval>
+	<fval name="caCerts"></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="ciphers"><value>FIPS:!SSLv3:!aNULL</value></fval>
+	<fval name="closePreviousConnection"><value>0</value></fval>
+	<fval name="connectionFailurePolicy"><value contentType="reference">-1</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="forwardClientHostHeader"><value>0</value></fval>
+	<fval name="handleRedirects"><value>1</value></fval>
+	<fval name="loadResponseBody"><value>0</value></fval>
+	<fval name="logFailure"><value>Failed to route request to endpoint.</value></fval>
+	<fval name="logFatal"><value>Error occurred while routing request to endpoint. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Successfully routed request to endpoint</value></fval>
+	<fval name="method"><value>POST</value></fval>
+	<fval name="name"><value>Create Auth0 App</value></fval>
+	<fval name="performRetries"><value>0</value></fval>
+	<fval name="profile"><value contentType="reference">
+<key type='AuthProfilesGroup'><id field='name' value='Auth Profiles'/><key type='OAuthGroup'><id field='name' value='OAuth2'/><key type='OAuthProviderProfile'><id field='name' value='Auth0'/><key type='OAuthAppProfile'><id field='name' value='Axway API-Management'/></key></key></key></key>	</value></fval>
+	<fval name="profileInUse"><value>1</value></fval>
+	<fval name="profileSelector"><value></value></fval>
+	<fval name="profileType"><value>reference</value></fval>
+	<fval name="protoHeaders"><value>${http.headers}</value></fval>
+	<fval name="proxyServer"><value contentType="reference">-1</value></fval>
+	<fval name="retryCount"><value>5</value></fval>
+	<fval name="retryHTTPRanges"><value contentType="reference">-1</value></fval>
+	<fval name="retryLatency"><value>500</value></fval>
+	<fval name="runPolicyOnConnectionFailure"><value>0</value></fval>
+	<fval name="saveTransactionOnFailure"><value>0</value></fval>
+	<fval name="sendProxyMode"><value>0</value></fval>
+	<fval name="sendReceivedContentHeaders"><value>0</value></fval>
+	<fval name="slaBreachAsFailure"><value>0</value></fval>
+	<fval name="sslUsers"><value contentType="reference">-1</value></fval>
+	<fval name="ssloptions">
+		<value>nosslv3</value>
+		<value>notlsv1</value>
+		<value>nosslv2</value>
+		<value>notlsv1_1</value>
+	</fval>
+	<fval name="stickyCookieDomain"><value></value></fval>
+	<fval name="stickyCookieExpiry"><value>600000</value></fval>
+	<fval name="stickyCookieName"><value>unnamed</value></fval>
+	<fval name="stickyCookiePath"><value></value></fval>
+	<fval name="stickyness"><value>0</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Created'/>
+					<key type='CompareAttributeFilter'>
+						<id field='name' value='Check HTTP-Status code - 1'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="transparentProxy"><value>0</value></fval>
+	<fval name="url"><value>https://${env.auth0_domain}/api/v2/clients</value></fval>
+	<fval name="useRootCerts"><value>1</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SaveToFileFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+				<key type='ConnectToURLFilter'>
+					<id field='name' value='Create Auth0 App'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="directory"><value>${environment.VINSTDIR}/message-archive</value></fval>
+	<fval name="fileName"><value>${id}.out</value></fval>
+	<fval name="includeHeaders"><value>0</value></fval>
+	<fval name="includeRequestLine"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="maxFileSize"><value>1000</value></fval>
+	<fval name="maxNumberFiles"><value>500</value></fval>
+	<fval name="name"><value>Persistence Details</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JavaScriptFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="consumedProperties"></fval>
+	<fval name="engineName"><value>nashorn</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="generatedProperties"></fval>
+	<fval name="logFailure"><value>Failed script filter</value></fval>
+	<fval name="logFatal"><value>Error while attempt to run script filter. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Passed script filter</value></fval>
+	<fval name="name"><value>Map Auth0 Client to API-Mgr app</value></fval>
+	<fval name="requiredProperties"></fval>
+	<fval name="script"><value>var imp = new JavaImporter(com.vordel.trace, com.vordel.kps.impl, java.util);&#xA;&#xA;with(imp) {&#xA;    function invoke(msg) {&#xA;&#x9;var app = msg.get(&quot;apimgmt.application&quot;);&#xA;&#xA;&#x9;var appId = app.get(&quot;id&quot;);&#xA;&#x9;var appName = app.get(&quot;name&quot;);&#xA;&#x9;var auth0ClientId = msg.get(&quot;auth0ClientId&quot;);&#xA;&#x9;//var rollbackActions = msg.get(&quot;rollbackActions&quot;);&#xA;&#xA;&#x9;var appMapTable = KPS.getInstance().getModel().getAliases().get(&quot;auth0appmap&quot;);&#xA;&#xA;&#x9;var kpsRecord = new HashMap();&#xA;&#x9;kpsRecord.put(&quot;applicationId&quot;, appId);&#xA;&#x9;kpsRecord.put(&quot;applicationName&quot;, appName);&#xA;&#x9;kpsRecord.put(&quot;auth0ClientId&quot;, auth0ClientId);&#xA;&#xA;&#x9;var transaction = appMapTable.beginTransaction();&#xA;&#x9;try {&#xA;&#x9;&#x9;transaction.create(kpsRecord);&#x9;&#xA;&#x9;} catch (e) {&#xA;&#x9;&#x9;Trace.error(&quot;Application-Id: &quot; + appId + &quot; already exists.&quot;);&#xA;&#x9;&#x9;return false;&#xA;&#x9;} finally {&#xA;&#x9;&#x9;transaction.close();&#xA;&#x9;}&#xA;        Trace.debug(&quot;Mapped App-Id: &quot; + appId + &quot; to Auth0-ClientId: &quot; + auth0ClientId + &quot;&quot;);&#xA;&#x9;//rollbackActions = rollbackActions + &quot;, appClientMap&quot;;&#xA;&#x9;//msg.put(&quot;rollbackActions&quot;, rollbackActions);&#xA;        return true;&#xA;    }&#xA;};</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Created'/>
+					<key type='ChangeMessageFilter'>
+						<id field='name' value='Create Client-Grant message'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ChangeMessageFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="body"><value>{&#xA;  &quot;client_id&quot;: &quot;${auth0ClientId}&quot;,&#xA;  &quot;audience&quot;: &quot;https://api.hilti.com&quot;,&#xA;  &quot;scope&quot;: []&#xA;}</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="logFailure"><value>Failed in setting the message</value></fval>
+	<fval name="logFatal"><value>Error in setting the message. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Success in setting the message</value></fval>
+	<fval name="name"><value>Create Client-Grant message</value></fval>
+	<fval name="outputContentType"><value>application/json</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Auth0 - AppCredentials Created'/>
+					<key type='ConnectToURLFilter'>
+						<id field='name' value='Create Client-Grant'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ConnectToURLFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="body"><value>${content.body}</value></fval>
+	<fval name="caCerts"></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="ciphers"><value>FIPS:!SSLv3:!aNULL</value></fval>
+	<fval name="closePreviousConnection"><value>0</value></fval>
+	<fval name="connectionFailurePolicy"><value contentType="reference">-1</value></fval>
+	<fval name="failureNode"><value contentType="reference">-1</value></fval>
+	<fval name="forwardClientHostHeader"><value>0</value></fval>
+	<fval name="handleRedirects"><value>1</value></fval>
+	<fval name="loadResponseBody"><value>0</value></fval>
+	<fval name="logFailure"><value>Failed to route request to endpoint.</value></fval>
+	<fval name="logFatal"><value>Error occurred while routing request to endpoint. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Successfully routed request to endpoint</value></fval>
+	<fval name="method"><value>POST</value></fval>
+	<fval name="name"><value>Create Client-Grant</value></fval>
+	<fval name="performRetries"><value>0</value></fval>
+	<fval name="profile"><value contentType="reference">
+<key type='AuthProfilesGroup'><id field='name' value='Auth Profiles'/><key type='OAuthGroup'><id field='name' value='OAuth2'/><key type='OAuthProviderProfile'><id field='name' value='Auth0'/><key type='OAuthAppProfile'><id field='name' value='Axway API-Management'/></key></key></key></key>	</value></fval>
+	<fval name="profileInUse"><value>1</value></fval>
+	<fval name="profileSelector"><value></value></fval>
+	<fval name="profileType"><value>reference</value></fval>
+	<fval name="protoHeaders"><value>${http.headers}</value></fval>
+	<fval name="proxyServer"><value contentType="reference">-1</value></fval>
+	<fval name="retryCount"><value>5</value></fval>
+	<fval name="retryHTTPRanges"><value contentType="reference">-1</value></fval>
+	<fval name="retryLatency"><value>500</value></fval>
+	<fval name="runPolicyOnConnectionFailure"><value>0</value></fval>
+	<fval name="saveTransactionOnFailure"><value>0</value></fval>
+	<fval name="sendProxyMode"><value>0</value></fval>
+	<fval name="sendReceivedContentHeaders"><value>0</value></fval>
+	<fval name="slaBreachAsFailure"><value>0</value></fval>
+	<fval name="sslUsers"><value contentType="reference">-1</value></fval>
+	<fval name="ssloptions">
+		<value>nosslv3</value>
+		<value>notlsv1</value>
+		<value>nosslv2</value>
+		<value>notlsv1_1</value>
+	</fval>
+	<fval name="stickyCookieDomain"><value></value></fval>
+	<fval name="stickyCookieExpiry"><value>600000</value></fval>
+	<fval name="stickyCookieName"><value>unnamed</value></fval>
+	<fval name="stickyCookiePath"><value></value></fval>
+	<fval name="stickyness"><value>0</value></fval>
+	<fval name="successNode"><value contentType="reference">-1</value></fval>
+	<fval name="transparentProxy"><value>0</value></fval>
+	<fval name="url"><value>https://${env.auth0_domain}/api/v2/client-grants</value></fval>
+	<fval name="useRootCerts"><value>1</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="SaveToFileFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Auth0 - AppCredentials Created'/>
+				<key type='ConnectToURLFilter'>
+					<id field='name' value='Create Client-Grant'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="directory"><value>${environment.VINSTDIR}/message-archive</value></fval>
+	<fval name="fileName"><value>${id}.out</value></fval>
+	<fval name="includeHeaders"><value>0</value></fval>
+	<fval name="includeRequestLine"><value>0</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="maxFileSize"><value>1000</value></fval>
+	<fval name="maxNumberFiles"><value>500</value></fval>
+	<fval name="name"><value>Persistence Details</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="FilterCircuit">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+		</key>
+	</key>
+	<fval name="category"><value contentType="reference">
+		<key type='PolicyCategoryGroup'>
+			<id field='name' value='Policy Categories'/>
+			<key type='PolicyCategory'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="description"><value></value></fval>
+	<fval name="logMask"><value>3</value></fval>
+	<fval name="name"><value>Validate Token</value></fval>
+	<fval name="start"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Validate Token'/>
+					<key type='AttributeExtractHTTPHeaderFilter'>
+						<id field='name' value='Get token'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JWTVerifyFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="jwkKey"><value>${jwk}</value></fval>
+	<fval name="jwsToken"><value>${token}</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="name"><value>Validate JWT</value></fval>
+	<fval name="publicKeyAlias"><value contentType="reference">-1</value></fval>
+	<fval name="publicKeyLocation"><value>0</value></fval>
+	<fval name="publicKeyMsgAttribute"><value>${certificate}</value></fval>
+	<fval name="sharedKey"><value></value></fval>
+	<fval name="sharedKeyInMsgAttr"><value>${symmetric.key}</value></fval>
+	<fval name="sharedKeySelection"><value>0</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Validate Token'/>
+					<key type='ChangeMessageFilter'>
+						<id field='name' value='Set JWT-Message'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="AttributeExtractHTTPHeaderFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="attributeName"><value>token</value></fval>
+	<fval name="base64Decode"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='attribute'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="headerName"><value>Authorization</value></fval>
+	<fval name="logFailure"><value>Failed to extract attribute HTTP header</value></fval>
+	<fval name="logFatal"><value>Error occurred while extracting attributes from HTTP header. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Extracted attribute from HTTP header</value></fval>
+	<fval name="name"><value>Get token</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Validate Token'/>
+					<key type='JavaScriptFilter'>
+						<id field='name' value='Remove Bearer'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="useQueryParameter"><value>0</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ChangeMessageFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="body"><value>${jwt.body}</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="logFailure"><value>Failed in setting the message</value></fval>
+	<fval name="logFatal"><value>Error in setting the message. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Success in setting the message</value></fval>
+	<fval name="name"><value>Set JWT-Message</value></fval>
+	<fval name="outputContentType"><value>application/json</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Validate Token'/>
+					<key type='JSONPathFilter'>
+						<id field='name' value='Get token details'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JSONPathFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="name"><value>Get token details</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Validate Token'/>
+					<key type='CopyAttributeFilter'>
+						<id field='name' value='Set scopes and valid token'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JSONPath">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+				<key type='JSONPathFilter'>
+					<id field='name' value='Get token details'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="attributeName"><value>oauth.token.client_id</value></fval>
+	<fval name="expression"><value>$.azp</value></fval>
+	<fval name="failOnError"><value>1</value></fval>
+	<fval name="unmarshalType"><value>java.lang.String</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JSONPath">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+				<key type='JSONPathFilter'>
+					<id field='name' value='Get token details'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="attributeName"><value>audience</value></fval>
+	<fval name="expression"><value>$.aud</value></fval>
+	<fval name="failOnError"><value>1</value></fval>
+	<fval name="unmarshalType"><value>java.lang.String</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JSONPath">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+				<key type='JSONPathFilter'>
+					<id field='name' value='Get token details'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="attributeName"><value>issuer</value></fval>
+	<fval name="expression"><value>$.iss</value></fval>
+	<fval name="failOnError"><value>1</value></fval>
+	<fval name="unmarshalType"><value>java.lang.String</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CompareAttributeFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="logFailure"><value>Filter failed</value></fval>
+	<fval name="logFatal"><value>Filter aborted due to exception</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Filter passed</value></fval>
+	<fval name="matchingRule"><value>MATCH_ALL</value></fval>
+	<fval name="name"><value>Check token details</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="AttributeCompare">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+				<key type='CompareAttributeFilter'>
+					<id field='name' value='Check token details'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="attrName"><value>issuer</value></fval>
+	<fval name="expression"><value>https://test-axway.eu.auth0.com</value></fval>
+	<fval name="matchType"><value>BEGINS_WITH</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="AttributeCompare">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+				<key type='CompareAttributeFilter'>
+					<id field='name' value='Check token details'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="attrName"><value>audience</value></fval>
+	<fval name="expression"><value>https://api.hilti.com</value></fval>
+	<fval name="matchType"><value>IS</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JavaScriptFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="consumedProperties"></fval>
+	<fval name="engineName"><value>nashorn</value></fval>
+	<fval name="generatedProperties"></fval>
+	<fval name="logFailure"><value>Failed script filter</value></fval>
+	<fval name="logFatal"><value>Error while attempt to run script filter. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Passed script filter</value></fval>
+	<fval name="name"><value>Remove Bearer</value></fval>
+	<fval name="requiredProperties"></fval>
+	<fval name="script"><value> var base64Import = new JavaImporter(com.vordel.common.base64);&#xA; with(base64Import) {&#xA;     function invoke(msg) {&#xA;&#xA;&#x9;var token = msg.get(&quot;token&quot;);&#xA;&#x9;token = token.replace(&quot;Bearer &quot;, &quot;&quot;);&#xA;&#x9;msg.put(&quot;token&quot;, token);&#xA;&#x9;return true;&#xA;     }&#xA;&#xA; };</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Validate Token'/>
+					<key type='CircuitDelegateFilter'>
+						<id field='name' value='Call &apos;Get JWK&apos;'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CopyAttributeFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="logFailure"><value>Failed to copy attributes</value></fval>
+	<fval name="logFatal"><value>Error occurred while copying attributes. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Copied attributes successfully</value></fval>
+	<fval name="name"><value>Set scopes and valid token</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Validate Token'/>
+					<key type='CompareAttributeFilter'>
+						<id field='name' value='Check token details'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CopyAttribute">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+				<key type='CopyAttributeFilter'>
+					<id field='name' value='Set scopes and valid token'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="attributeValue"><value>true</value></fval>
+	<fval name="fromAttributeLocation"><value>3</value></fval>
+	<fval name="fromAttributeName"><value></value></fval>
+	<fval name="fromAttributeNamespace"><value></value></fval>
+	<fval name="toAttributeLocation"><value>1</value></fval>
+	<fval name="toAttributeName"><value>oauth.token.valid</value></fval>
+	<fval name="toAttributeNamespace"><value></value></fval>
+	<fval name="toListAttribute"><value>0</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CopyAttribute">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+				<key type='CopyAttributeFilter'>
+					<id field='name' value='Set scopes and valid token'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="attributeValue"><value>resource.WRITE, resource.READ</value></fval>
+	<fval name="fromAttributeLocation"><value>3</value></fval>
+	<fval name="fromAttributeName"><value></value></fval>
+	<fval name="fromAttributeNamespace"><value></value></fval>
+	<fval name="toAttributeLocation"><value>1</value></fval>
+	<fval name="toAttributeName"><value>oauth.token.scopes</value></fval>
+	<fval name="toAttributeNamespace"><value></value></fval>
+	<fval name="toListAttribute"><value>0</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CircuitDelegateFilter">
+	<key type='CircuitContainer'>
+		<id field='name' value='Identity Provider'/>
+		<key type='CircuitContainer'>
+			<id field='name' value='Auth0'/>
+			<key type='FilterCircuit'>
+				<id field='name' value='Validate Token'/>
+			</key>
+		</key>
+	</key>
+	<fval name="abortProcessingOnLogError"><value>0</value></fval>
+	<fval name="category"><value contentType="reference">
+		<key type='CategoryGroup'>
+			<id field='name' value='Filter Categories'/>
+			<key type='Category'>
+				<id field='name' value='miscellaneous'/>
+			</key>
+		</key>
+	</value></fval>
+	<fval name="circuitPK"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Identity Provider'/><key type='CircuitContainer'><id field='name' value='Auth0'/><key type='CircuitContainer'><id field='name' value='lib'/><key type='FilterCircuit'><id field='name' value='Get JWK'/></key></key></key></key>	</value></fval>
+	<fval name="logFailure"><value>Failed in calling policy shortcut</value></fval>
+	<fval name="logFatal"><value>Error in calling policy shortcut circuit. Error: ${circuit.exception}</value></fval>
+	<fval name="logMask"><value>2</value></fval>
+	<fval name="logMaskType"><value>SERVICE</value></fval>
+	<fval name="logSuccess"><value>Success in calling policy shortcut</value></fval>
+	<fval name="name"><value>Call &apos;Get JWK&apos;</value></fval>
+	<fval name="successNode"><value contentType="reference">
+		<key type='CircuitContainer'>
+			<id field='name' value='Identity Provider'/>
+			<key type='CircuitContainer'>
+				<id field='name' value='Auth0'/>
+				<key type='FilterCircuit'>
+					<id field='name' value='Validate Token'/>
+					<key type='JWTVerifyFilter'>
+						<id field='name' value='Validate JWT'/>
+					</key>
+				</key>
+			</key>
+		</key>
+	</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CircuitContainer">
+	<fval name="name"><value>Identity Provider</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="PortalCallback">
+	<key type='PortalCallbackGroup'>
+		<id field='name' value='Portal Alerts'/>
+		<key type='PortalCallbackGroup'>
+			<id field='name' value='Application Credentials'/>
+		</key>
+	</key>
+	<fval name="enabled"><value>1</value></fval>
+	<fval name="filterCircuit"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Identity Provider'/><key type='CircuitContainer'><id field='name' value='Auth0'/><key type='FilterCircuit'><id field='name' value='Auth0 - AppCredentials Created'/></key></key></key>	</value></fval>
+	<fval name="id"><value>alert.applicationcredentials.create</value></fval>
+	<fval name="name"><value>Create Application Credential</value></fval>
+	<fval name="type"><value>Governance</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="PortalCallbackGroup">
+	<key type='PortalCallbackGroup'>
+		<id field='name' value='Portal Alerts'/>
+	</key>
+	<fval name="name"><value>Application Credentials</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="PortalCallbackGroup">
+	<fval name="name"><value>Portal Alerts</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="PortalConfiguration">
+	<fval name="adminDN"><value>cn=apiadmin,ou=organizations,ou=APIPortal</value></fval>
+	<fval name="adminEmail"><value>apiadmin@localhost</value></fval>
+	<fval name="adminName"><value>apiadmin</value></fval>
+	<fval name="adminPassword"><value></value></fval>
+	<fval name="apiregAuthenticationPolicies"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='API-Manager'/><key type='FilterCircuit'><id field='name' value='Is Mockup?'/></key></key>	</value></fval>
+	<fval name="apiregFaultHandlerPolicies"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Generated Policies'/><key type='CircuitContainer'><id field='name' value='REST API&apos;s'/><key type='CircuitContainer'><id field='name' value='Templates'/><key type='FilterCircuit'><id field='name' value='Default Fault Handler'/></key></key></key></key>	</value></fval>
+	<fval name="apiregGlobalRequestPolicies"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='API Keys'/><key type='FilterCircuit'><id field='name' value='Amazon V4 - ListUsers'/></key></key>	</value></fval>
+	<fval name="apiregGlobalResponsePolicies"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='API Keys'/><key type='FilterCircuit'><id field='name' value='Amazon V2 - DescribeInstances'/></key></key>	</value></fval>
+	<fval name="apiregOAuthClientProfiles"><value contentType="reference">
+<key type='AuthProfilesGroup'><id field='name' value='Auth Profiles'/><key type='OAuthGroup'><id field='name' value='OAuth2'/><key type='OAuthProviderProfile'><id field='name' value='API Gateway'/><key type='OAuthAppProfile'><id field='name' value='Sample Client Authzcode App'/></key></key></key></key>	</value></fval>
+	<fval name="apiregOAuthTokenInfoPolicies"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Identity Provider'/><key type='CircuitContainer'><id field='name' value='Auth0'/><key type='FilterCircuit'><id field='name' value='Validate Token'/></key></key></key>	</value></fval>
+	<fval name="apiregOAuthTokenStores"><value contentType="reference">
+<key type='OAuth2StoresGroup'><id field='name' value='OAuth2 Stores'/><key type='AccessTokenStoreGroup'><id field='name' value='Access Token Stores'/><key type='AccessTokenPersist'><id field='name' value='OAuth Access Token Store'/></key></key></key>	</value></fval>
+	<fval name="apiregRequestPolicies"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='API Manager Policies'/><key type='FilterCircuit'><id field='name' value='API Manager Protection Policy'/></key></key>	</value></fval>
+	<fval name="apiregResponsePolicies"></fval>
+	<fval name="apiregRoutingPolicies"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='API-Manager'/><key type='FilterCircuit'><id field='name' value='MainRoutingPolicy'/></key></key>	</value></fval>
+	<fval name="applicationQuotaWarnThresholdPercent"><value>80</value></fval>
+	<fval name="asyncExecutorStopWaitMs"><value>5000</value></fval>
+	<fval name="communityName"><value>Community</value></fval>
+	<fval name="dbConn"><value contentType="reference">
+<key type='DbConnectionGroup'><id field='name' value='Database Connections'/><key type='DbConnection'><id field='name' value='api-env analytics'/></key></key>	</value></fval>
+	<fval name="excludeApiDeprecatedHeader"><value>false</value></fval>
+	<fval name="excludeApiRetireTimeHeader"><value>false</value></fval>
+	<fval name="latestRestApiVersionUri"><value></value></fval>
+	<fval name="ldapPort"><value>0</value></fval>
+	<fval name="lifecycleSchedulerCorePoolSize"><value>1</value></fval>
+	<fval name="lifecycleSchedulerStopWaitMs"><value>5000</value></fval>
+	<fval name="metricsStoringEnabled"><value>1</value></fval>
+	<fval name="name"><value>Portal Config</value></fval>
+	<fval name="oauth2Hostname"><value></value></fval>
+	<fval name="oauth2LoginPath"><value>/api/oauth/authorize</value></fval>
+	<fval name="oauth2Port"><value></value></fval>
+	<fval name="oauth2TokenPath"><value>/api/oauth/token</value></fval>
+	<fval name="oauth2TokenRequestPath"><value>/api/oauth/authorize</value></fval>
+	<fval name="orgDn"><value>ou=organizations</value></fval>
+	<fval name="organizationRoot"><value>ou=organizations,ou=APIPortal</value></fval>
+	<fval name="portalRoot"><value>ou=APIPortal</value></fval>
+	<fval name="quotaCaching"><value>CASSANDRA</value></fval>
+	<fval name="quotaCachingDatabase"><value contentType="reference">-1</value></fval>
+	<fval name="quotaCachingMinWindowSecs"><value>0</value></fval>
+	<fval name="quotaReadConsistency"><value>ONE</value></fval>
+	<fval name="quotaWriteConsistency"><value>ONE</value></fval>
+	<fval name="smtpServer"><value contentType="reference">
+<key type='SMTPServerGroup'><id field='name' value='SMTP Servers'/><key type='SMTPServer'><id field='name' value='api-env SMTP'/></key></key>	</value></fval>
+	<fval name="systemQuotaWarnThresholdPercent"><value>80</value></fval>
+	<fval name="useEmbedded"><value>1</value></fval>
+	<fval name="usrprovAccountCreateFailureCircuit"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Sample Policies'/><key type='CircuitContainer'><id field='name' value='API Management Identity Provider api-env'/><key type='FilterCircuit'><id field='name' value='Account Creation Failure'/></key></key></key>	</value></fval>
+	<fval name="usrprovAccountCreateSuccessCircuit"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Sample Policies'/><key type='CircuitContainer'><id field='name' value='API Management Identity Provider api-env'/><key type='FilterCircuit'><id field='name' value='Account Creation Success'/></key></key></key>	</value></fval>
+	<fval name="usrprovAuthNCircuit"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Sample Policies'/><key type='CircuitContainer'><id field='name' value='API Management Identity Provider api-env'/><key type='CircuitContainer'><id field='name' value='LDAP'/><key type='FilterCircuit'><id field='name' value='Authenticate LDAP Account'/></key></key></key></key>	</value></fval>
+	<fval name="usrprovEnabled"><value>1</value></fval>
+	<fval name="usrprovGetUserInfoCircuit"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Sample Policies'/><key type='CircuitContainer'><id field='name' value='API Management Identity Provider api-env'/><key type='CircuitContainer'><id field='name' value='LDAP'/><key type='FilterCircuit'><id field='name' value='Retrieve LDAP Account Information'/></key></key></key></key>	</value></fval>
+	<fval name="vapiEventTTLMs"><value>600000</value></fval>
+	<fval name="vapiNotifierCorePoolSize"><value>0</value></fval>
+	<fval name="vapiNotifierKeepAliveMs"><value>60000</value></fval>
+	<fval name="vapiNotifierMaxPoolSize"><value>-1</value></fval>
+	<fval name="vapiNotifierStopWaitMs"><value>5000</value></fval>
+	<fval name="vapiPollerInitialDelayMs"><value>0</value></fval>
+	<fval name="vapiPollerPeriodMs"><value>200</value></fval>
+	<fval name="vapiPollerStopWaitMs"><value>5000</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="PortalCallback">
+	<key type='PortalCallbackGroup'>
+		<id field='name' value='Portal Alerts'/>
+		<key type='PortalCallbackGroup'>
+			<id field='name' value='Application Credentials'/>
+		</key>
+	</key>
+	<fval name="enabled"><value>1</value></fval>
+	<fval name="filterCircuit"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Identity Provider'/><key type='CircuitContainer'><id field='name' value='Auth0'/><key type='FilterCircuit'><id field='name' value='Auth0 - AppCredentials Deleted'/></key></key></key>	</value></fval>
+	<fval name="id"><value>alert.applicationcredentials.delete</value></fval>
+	<fval name="name"><value>Delete Application Credential</value></fval>
+	<fval name="type"><value>Governance</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="Cache">
+	<key type='CacheManager'>
+		<id field='name' value='Cache Manager'/>
+	</key>
+	<fval name="diskExpiryThreadIntervalSeconds"><value>120</value></fval>
+	<fval name="diskPersistent"><value>0</value></fval>
+	<fval name="diskSpoolBufferSizeMB"><value>30</value></fval>
+	<fval name="eternal"><value>1</value></fval>
+	<fval name="maxElementsInMemory"><value>1000</value></fval>
+	<fval name="maxElementsOnDisk"><value>1000</value></fval>
+	<fval name="memoryStoreEvictionPolicy"><value>LRU</value></fval>
+	<fval name="name"><value>JWK-Cache</value></fval>
+	<fval name="overflowToDisk"><value>1</value></fval>
+	<fval name="timeToIdleSeconds"><value>0</value></fval>
+	<fval name="timeToLiveSeconds"><value>0</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="CacheManager">
+	<fval name="name"><value>Cache Manager</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="ESConfiguration">
+	<fval name="name"><value>Entity Store Configuration</value></fval>
+	<fval name="passphraseTest"><value>aHR0cDsvL3d3dy52b3JkZWwuY29t</value></fval>
+	<fval name="productKey"><value>VordelGateway</value></fval>
+	<fval name="version"><value>7.6.2</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="OAuthAppProfile">
+	<key type='AuthProfilesGroup'>
+		<id field='name' value='Auth Profiles'/>
+		<key type='OAuthGroup'>
+			<id field='name' value='OAuth2'/>
+			<key type='OAuthProviderProfile'>
+				<id field='name' value='Auth0'/>
+			</key>
+		</key>
+	</key>
+	<fval name="assertionType"><value>CreateAssertion</value></fval>
+	<fval name="clientIdHeaderName"><value>client_id</value></fval>
+	<fval name="clientSecretHeaderName"><value>client_secret</value></fval>
+	<fval name="clientid"><value>&lt;YOUR_AUTH0_CLIENTID&gt;</value></fval>
+	<fval name="clientsecret"><value>S25zMlBfOV9vLUxtWExVRk5DWENtV1hzN2VjNml6NTdlRDRob1h6bHU5NTRSY2V4c2Y2am5Ybjdr&#xA;X0NfeW5LNw==</value></fval>
+	<fval name="driftTime"><value>1</value></fval>
+	<fval name="externalAssertion"><value>${oauth.saml.assertion}</value></fval>
+	<fval name="jwtExpiresIn"><value>60</value></fval>
+	<fval name="jwtSigner"><value contentType="reference">-1</value></fval>
+	<fval name="lifeTime"><value>60</value></fval>
+	<fval name="locationOfClientDetails"><value>QueryString</value></fval>
+	<fval name="name"><value>Axway API-Management</value></fval>
+	<fval name="oauthFlowType"><value>client_credentials</value></fval>
+	<fval name="redirectURL"><value></value></fval>
+	<fval name="resourceOwnerId"><value>${oauth.resource.owner.id}</value></fval>
+	<fval name="resourceOwnerPassword"><value>${oauth.resource.owner.password}</value></fval>
+	<fval name="resourceOwnerPasswordPrivate"><value></value></fval>
+	<fval name="resourceOwnerPasswordType"><value>wildcard</value></fval>
+	<fval name="samlResourceOwnerId"><value>${authentication.subject.id}</value></fval>
+	<fval name="samlSigner"><value contentType="reference">-1</value></fval>
+	<fval name="signatureAlg"><value>RS256</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="Property">
+	<key type='AuthProfilesGroup'>
+		<id field='name' value='Auth Profiles'/>
+		<key type='OAuthGroup'>
+			<id field='name' value='OAuth2'/>
+			<key type='OAuthProviderProfile'>
+				<id field='name' value='Auth0'/>
+				<key type='OAuthAppProfile'>
+					<id field='name' value='Axway API-Management'/>
+				</key>
+			</key>
+		</key>
+	</key>
+	<fval name="name"><value>audience</value></fval>
+	<fval name="value"><value>https://test-axway.eu.auth0.com/api/v2/</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="OAuthProviderProfile">
+	<key type='AuthProfilesGroup'>
+		<id field='name' value='Auth Profiles'/>
+		<key type='OAuthGroup'>
+			<id field='name' value='OAuth2'/>
+		</key>
+	</key>
+	<fval name="authzUrl"><value>https://test-axway.eu.auth0.com/oauth/NOT_USED</value></fval>
+	<fval name="cacheToUse"><value contentType="reference">
+<key type='CacheManager'><id field='name' value='Cache Manager'/><key type='Cache'><id field='name' value='OAuth Client State Cache'/></key></key>	</value></fval>
+	<fval name="class"><value>com.vordel.oauth.client.providers.BaseOAuth2Provider</value></fval>
+	<fval name="name"><value>Auth0</value></fval>
+	<fval name="tokenStore"><value contentType="reference">
+<key type='OAuth2StoresGroup'><id field='name' value='OAuth2 Stores'/><key type='ClientAccessTokenStoreGroup'><id field='name' value='Client Access Token Stores'/><key type='ClientAccessTokenPersist'><id field='name' value='OAuth Client Access Token Store'/></key></key></key>	</value></fval>
+	<fval name="tokenUrl"><value>https://test-axway.eu.auth0.com/oauth/token</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="OAuthGroup">
+	<key type='AuthProfilesGroup'>
+		<id field='name' value='Auth Profiles'/>
+	</key>
+	<fval name="name"><value>OAuth2</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="AuthProfilesGroup">
+	<fval name="name"><value>Auth Profiles</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="PortalCallback">
+	<key type='PortalCallbackGroup'>
+		<id field='name' value='Portal Alerts'/>
+		<key type='PortalCallbackGroup'>
+			<id field='name' value='Application'/>
+		</key>
+	</key>
+	<fval name="enabled"><value>1</value></fval>
+	<fval name="filterCircuit"><value contentType="reference">
+<key type='CircuitContainer'><id field='name' value='Identity Provider'/><key type='CircuitContainer'><id field='name' value='Auth0'/><key type='FilterCircuit'><id field='name' value='Auth0 - App Deleted'/></key></key></key>	</value></fval>
+	<fval name="id"><value>alert.application.delete</value></fval>
+	<fval name="name"><value>Delete Application</value></fval>
+	<fval name="type"><value>Governance</value></fval>
+</entity>
+<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="PortalCallbackGroup">
+	<key type='PortalCallbackGroup'>
+		<id field='name' value='Portal Alerts'/>
+	</key>
+	<fval name="name"><value>Application</value></fval>
+</entity>
+</entityStoreData>
