@@ -1,20 +1,10 @@
 # Description
 
-[![Build Status](https://travis-ci.org/jdavanne/docker-sni-proxy.svg?branch=master)](https://travis-ci.org/jdavanne/docker-sni-proxy)
-
-Proxy to apply Axway API Gateway policies (authN, authZ, content manipulation,...) on MQTT protocol for any MQTT broker.
-
-
-![alt text][Image1]
-
-[Image1]: https://github.com/Axway-API-Management-Plus/mqtt-proxy/blob/master/readme/mqtt-proxy01.png "Image1"
+Set of Policies helps you to integrate/connect the Axway API-Management solution with the external Identity-Provider: https://auth0.com.
+The purpose is to provider Application-Developer the Self-Service capabilities they want using an API-Developer-Portal including API-Subscrioptions and on the other hand use a dedicated solution for Identity- & Token-Management.
 
 
-The diagram below details more flows between the various components:
-
-![alt text][Image2]
-
-[Image2]: https://github.com/Axway-API-Management-Plus/mqtt-proxy/blob/master/readme/mqtt-proxy02.png "Image2"
+[Image1]: https://github.com/Axway-API-Management-Plus/auth0-apim-integration/blob/master/images/External_Token-Provider-Self-Service.png "Image1"
 
 
 
