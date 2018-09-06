@@ -71,12 +71,15 @@ With that, the API-Gateway is able to automatically get an access token, when co
 As the API-Management platform must communicate with your Auth0 tentant, the right tenant must be configured in some places.
 
 Create a new EnvSettings property
-Open <apigw-install>/groups/group-<n>/instance-<n>/conf/envSettings.props
+Open <apigw-install>/groups/group-<n>/instance-<n>/conf/**envSettings.props**
 Add a new propery: 
 env.auth0_domain=<Your_Auth0_Tenant_Id> (e.g. test-axway.eu.auth0.com)
- 
-Open the Policy: Identity Provider/Auth0/Auth0 - Validate Token
+
+Open the Policy: Identity Provider/Auth0/**Auth0 - Validate Token**
 Edit the filter: Check token details that it corresponds to you Audience & Tentant
+
+Open the Policy: Identity Provider/Auth0/**Auth0 - AppCredentials Created**
+Edit the filter: Create Client-Grant message and adjust the identifier for your API (Audience) to what you have configured.
 
 ### API-Manager configuration
 Please make sure, in the API-Manager the following alerts are enabled. They are used to communicate with Auth0 for the required actions:
