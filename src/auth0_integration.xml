@@ -101,7 +101,6 @@
 		<type name="RootChild" version="0"/>
 		<type name="SaveToFileFilter" version="2"/>
 		<type name="SetAttributeFilter" version="0"/>
-		<type name="TraceFilter" version="3"/>
 		<type name="TrueFilter" version="0"/>
 	</typeVersions>
 	<realizedTypes><![CDATA[
@@ -578,15 +577,6 @@
 	<field default="${jwk}" name="jwkKey" type="string"/>
 	
 	 </entityType>
-<entityType xmlns="http://www.vordel.com/2005/06/24/entityStore" extends="Filter" name="TraceFilter">
-        <constant name="_version" type="integer" value="3"/>
-		    <constant name="class" type="string" value="com.vordel.circuit.basic.TraceFilter"/>
-        <field cardinality="?" name="traceMsg" type="string"/>
-        <field cardinality="1" default="5" name="traceLevel" type="integer"/>
-        <field cardinality="1" default="1" name="traceAttributes" type="boolean"/>
-        <field cardinality="1" default="0" name="traceBody" type="boolean"/>
-        <field cardinality="1" default="0" name="doIndent" type="boolean"/>
-    </entityType>
 </entityStoreData>
 	]]></realizedTypes>
 </metaInfo>
@@ -875,47 +865,6 @@
 				<id field='name' value='Auth0'/>
 				<key type='FilterCircuit'>
 					<id field='name' value='Auth0 - AppCredentials Deleted'/>
-					<key type='TraceFilter'>
-						<id field='name' value='Trace Filter'/>
-					</key>
-				</key>
-			</key>
-		</key>
-	</value></fval>
-</entity>
-<entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="TraceFilter">
-	<key type='CircuitContainer'>
-		<id field='name' value='Identity Provider'/>
-		<key type='CircuitContainer'>
-			<id field='name' value='Auth0'/>
-			<key type='FilterCircuit'>
-				<id field='name' value='Auth0 - AppCredentials Deleted'/>
-			</key>
-		</key>
-	</key>
-	<fval name="abortProcessingOnLogError"><value>0</value></fval>
-	<fval name="category"><value contentType="reference">
-		<key type='CategoryGroup'>
-			<id field='name' value='Filter Categories'/>
-			<key type='Category'>
-				<id field='name' value='miscellaneous'/>
-			</key>
-		</key>
-	</value></fval>
-	<fval name="doIndent"><value>0</value></fval>
-	<fval name="logFailure"><value>Failed to trace the message properties</value></fval>
-	<fval name="logFatal"><value>Error while tracing the message properties. Error: ${circuit.exception}</value></fval>
-	<fval name="logMask"><value>2</value></fval>
-	<fval name="logMaskType"><value>SERVICE</value></fval>
-	<fval name="logSuccess"><value>Traced the message properties</value></fval>
-	<fval name="name"><value>Trace Filter</value></fval>
-	<fval name="successNode"><value contentType="reference">
-		<key type='CircuitContainer'>
-			<id field='name' value='Identity Provider'/>
-			<key type='CircuitContainer'>
-				<id field='name' value='Auth0'/>
-				<key type='FilterCircuit'>
-					<id field='name' value='Auth0 - AppCredentials Deleted'/>
 					<key type='GetOAuthClientTokenFilter'>
 						<id field='name' value='Get Auth0 Access Token'/>
 					</key>
@@ -923,10 +872,6 @@
 			</key>
 		</key>
 	</value></fval>
-	<fval name="traceAttributes"><value>1</value></fval>
-	<fval name="traceBody"><value>0</value></fval>
-	<fval name="traceLevel"><value>3</value></fval>
-	<fval name="traceMsg"><value></value></fval>
 </entity>
 <entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="GetOAuthClientTokenFilter">
 	<key type='CircuitContainer'>
@@ -2523,7 +2468,7 @@
 		</key>
 	</key>
 	<fval name="abortProcessingOnLogError"><value>0</value></fval>
-	<fval name="body"><value>{&#xA;  &quot;client_id&quot;: &quot;${auth0ClientId}&quot;,&#xA;  &quot;audience&quot;: &quot;https://api.hilti.com&quot;,&#xA;  &quot;scope&quot;: []&#xA;}</value></fval>
+	<fval name="body"><value>{&#xA;  &quot;client_id&quot;: &quot;${auth0ClientId}&quot;,&#xA;  &quot;audience&quot;: &quot;https://api.customer.com&quot;,&#xA;  &quot;scope&quot;: []&#xA;}</value></fval>
 	<fval name="category"><value contentType="reference">
 		<key type='CategoryGroup'>
 			<id field='name' value='Filter Categories'/>
@@ -2674,14 +2619,14 @@
 	</value></fval>
 	<fval name="description"><value></value></fval>
 	<fval name="logMask"><value>3</value></fval>
-	<fval name="name"><value>Validate Token</value></fval>
+	<fval name="name"><value>Auth0 - Validate Token</value></fval>
 	<fval name="start"><value contentType="reference">
 		<key type='CircuitContainer'>
 			<id field='name' value='Identity Provider'/>
 			<key type='CircuitContainer'>
 				<id field='name' value='Auth0'/>
 				<key type='FilterCircuit'>
-					<id field='name' value='Validate Token'/>
+					<id field='name' value='Auth0 - Validate Token'/>
 					<key type='AttributeExtractHTTPHeaderFilter'>
 						<id field='name' value='Get token'/>
 					</key>
@@ -2696,7 +2641,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 			</key>
 		</key>
 	</key>
@@ -2729,7 +2674,7 @@
 			<key type='CircuitContainer'>
 				<id field='name' value='Auth0'/>
 				<key type='FilterCircuit'>
-					<id field='name' value='Validate Token'/>
+					<id field='name' value='Auth0 - Validate Token'/>
 					<key type='ChangeMessageFilter'>
 						<id field='name' value='Set JWT-Message'/>
 					</key>
@@ -2744,7 +2689,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 			</key>
 		</key>
 	</key>
@@ -2772,7 +2717,7 @@
 			<key type='CircuitContainer'>
 				<id field='name' value='Auth0'/>
 				<key type='FilterCircuit'>
-					<id field='name' value='Validate Token'/>
+					<id field='name' value='Auth0 - Validate Token'/>
 					<key type='JavaScriptFilter'>
 						<id field='name' value='Remove Bearer'/>
 					</key>
@@ -2788,7 +2733,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 			</key>
 		</key>
 	</key>
@@ -2815,7 +2760,7 @@
 			<key type='CircuitContainer'>
 				<id field='name' value='Auth0'/>
 				<key type='FilterCircuit'>
-					<id field='name' value='Validate Token'/>
+					<id field='name' value='Auth0 - Validate Token'/>
 					<key type='JSONPathFilter'>
 						<id field='name' value='Get token details'/>
 					</key>
@@ -2830,7 +2775,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 			</key>
 		</key>
 	</key>
@@ -2855,7 +2800,7 @@
 			<key type='CircuitContainer'>
 				<id field='name' value='Auth0'/>
 				<key type='FilterCircuit'>
-					<id field='name' value='Validate Token'/>
+					<id field='name' value='Auth0 - Validate Token'/>
 					<key type='CopyAttributeFilter'>
 						<id field='name' value='Set scopes and valid token'/>
 					</key>
@@ -2870,7 +2815,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 				<key type='JSONPathFilter'>
 					<id field='name' value='Get token details'/>
 				</key>
@@ -2888,7 +2833,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 				<key type='JSONPathFilter'>
 					<id field='name' value='Get token details'/>
 				</key>
@@ -2906,7 +2851,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 				<key type='JSONPathFilter'>
 					<id field='name' value='Get token details'/>
 				</key>
@@ -2924,7 +2869,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 			</key>
 		</key>
 	</key>
@@ -2951,7 +2896,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 				<key type='CompareAttributeFilter'>
 					<id field='name' value='Check token details'/>
 				</key>
@@ -2959,7 +2904,7 @@
 		</key>
 	</key>
 	<fval name="attrName"><value>issuer</value></fval>
-	<fval name="expression"><value>https://test-axway.eu.auth0.com</value></fval>
+	<fval name="expression"><value>https://&lt;auth0-tentant-id&gt;.auth0.com</value></fval>
 	<fval name="matchType"><value>BEGINS_WITH</value></fval>
 </entity>
 <entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="AttributeCompare">
@@ -2968,7 +2913,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 				<key type='CompareAttributeFilter'>
 					<id field='name' value='Check token details'/>
 				</key>
@@ -2976,7 +2921,7 @@
 		</key>
 	</key>
 	<fval name="attrName"><value>audience</value></fval>
-	<fval name="expression"><value>https://api.hilti.com</value></fval>
+	<fval name="expression"><value>https://api.customer.com</value></fval>
 	<fval name="matchType"><value>IS</value></fval>
 </entity>
 <entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="JavaScriptFilter">
@@ -2985,7 +2930,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 			</key>
 		</key>
 	</key>
@@ -3015,7 +2960,7 @@
 			<key type='CircuitContainer'>
 				<id field='name' value='Auth0'/>
 				<key type='FilterCircuit'>
-					<id field='name' value='Validate Token'/>
+					<id field='name' value='Auth0 - Validate Token'/>
 					<key type='CircuitDelegateFilter'>
 						<id field='name' value='Call &apos;Get JWK&apos;'/>
 					</key>
@@ -3030,7 +2975,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 			</key>
 		</key>
 	</key>
@@ -3055,7 +3000,7 @@
 			<key type='CircuitContainer'>
 				<id field='name' value='Auth0'/>
 				<key type='FilterCircuit'>
-					<id field='name' value='Validate Token'/>
+					<id field='name' value='Auth0 - Validate Token'/>
 					<key type='CompareAttributeFilter'>
 						<id field='name' value='Check token details'/>
 					</key>
@@ -3070,7 +3015,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 				<key type='CopyAttributeFilter'>
 					<id field='name' value='Set scopes and valid token'/>
 				</key>
@@ -3092,7 +3037,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 				<key type='CopyAttributeFilter'>
 					<id field='name' value='Set scopes and valid token'/>
 				</key>
@@ -3114,7 +3059,7 @@
 		<key type='CircuitContainer'>
 			<id field='name' value='Auth0'/>
 			<key type='FilterCircuit'>
-				<id field='name' value='Validate Token'/>
+				<id field='name' value='Auth0 - Validate Token'/>
 			</key>
 		</key>
 	</key>
@@ -3141,7 +3086,7 @@
 			<key type='CircuitContainer'>
 				<id field='name' value='Auth0'/>
 				<key type='FilterCircuit'>
-					<id field='name' value='Validate Token'/>
+					<id field='name' value='Auth0 - Validate Token'/>
 					<key type='JWTVerifyFilter'>
 						<id field='name' value='Validate JWT'/>
 					</key>
@@ -3192,7 +3137,7 @@
 	<fval name="apiregOAuthClientProfiles"><value contentType="reference">
 <key type='AuthProfilesGroup'><id field='name' value='Auth Profiles'/><key type='OAuthGroup'><id field='name' value='OAuth2'/><key type='OAuthProviderProfile'><id field='name' value='API Gateway'/><key type='OAuthAppProfile'><id field='name' value='Sample Client Authzcode App'/></key></key></key></key>	</value></fval>
 	<fval name="apiregOAuthTokenInfoPolicies"><value contentType="reference">
-<key type='CircuitContainer'><id field='name' value='Identity Provider'/><key type='CircuitContainer'><id field='name' value='Auth0'/><key type='FilterCircuit'><id field='name' value='Validate Token'/></key></key></key>	</value></fval>
+<key type='CircuitContainer'><id field='name' value='Identity Provider'/><key type='CircuitContainer'><id field='name' value='Auth0'/><key type='FilterCircuit'><id field='name' value='Auth0 - Validate Token'/></key></key></key>	</value></fval>
 	<fval name="apiregOAuthTokenStores"><value contentType="reference">
 <key type='OAuth2StoresGroup'><id field='name' value='OAuth2 Stores'/><key type='AccessTokenStoreGroup'><id field='name' value='Access Token Stores'/><key type='AccessTokenPersist'><id field='name' value='OAuth Access Token Store'/></key></key></key>	</value></fval>
 	<fval name="apiregRequestPolicies"><value contentType="reference">
@@ -3342,14 +3287,14 @@
 			<id field='name' value='OAuth2'/>
 		</key>
 	</key>
-	<fval name="authzUrl"><value>https://test-axway.eu.auth0.com/oauth/NOT_USED</value></fval>
+	<fval name="authzUrl"><value>https://&lt;Your-Auht0-Tenant&gt;/oauth/NOT_USED</value></fval>
 	<fval name="cacheToUse"><value contentType="reference">
 <key type='CacheManager'><id field='name' value='Cache Manager'/><key type='Cache'><id field='name' value='OAuth Client State Cache'/></key></key>	</value></fval>
 	<fval name="class"><value>com.vordel.oauth.client.providers.BaseOAuth2Provider</value></fval>
 	<fval name="name"><value>Auth0</value></fval>
 	<fval name="tokenStore"><value contentType="reference">
 <key type='OAuth2StoresGroup'><id field='name' value='OAuth2 Stores'/><key type='ClientAccessTokenStoreGroup'><id field='name' value='Client Access Token Stores'/><key type='ClientAccessTokenPersist'><id field='name' value='OAuth Client Access Token Store'/></key></key></key>	</value></fval>
-	<fval name="tokenUrl"><value>https://test-axway.eu.auth0.com/oauth/token</value></fval>
+	<fval name="tokenUrl"><value>https://&lt;Your-Auht0-Tenant&gt;/oauth/token</value></fval>
 </entity>
 <entity xmlns="http://www.vordel.com/2005/06/24/entityStore"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" type="OAuthGroup">
 	<key type='AuthProfilesGroup'>
