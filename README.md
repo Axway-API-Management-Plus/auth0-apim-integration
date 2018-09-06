@@ -1,75 +1,49 @@
+
 # Description
 
-[![Build Status](https://travis-ci.org/jdavanne/docker-sni-proxy.svg?branch=master)](https://travis-ci.org/jdavanne/docker-sni-proxy)
+Set of Policies helps you to integrate/connect the Axway API-Management solution with the external Identity-Provider: https://auth0.com.
+The purpose is to provider Application-Developer the Self-Service capabilities they want using an API-Developer-Portal including API-Subscrioptions and on the other hand use a dedicated solution for Identity- & Token-Management.
 
-Proxy to apply Axway API Gateway policies (authN, authZ, content manipulation,...) on MQTT protocol for any MQTT broker.
-
-
-![alt text][Image1]
-
-[Image1]: https://github.com/Axway-API-Management-Plus/mqtt-proxy/blob/master/readme/mqtt-proxy01.png "Image1"
-
-
-The diagram below details more flows between the various components:
-
-![alt text][Image2]
-
-[Image2]: https://github.com/Axway-API-Management-Plus/mqtt-proxy/blob/master/readme/mqtt-proxy02.png "Image2"
+![Self-Service-Flow](https://github.com/Axway-API-Management-Plus/auth0-apim-integration/blob/master/images/External_Token-Provider-Self-Service.png)
 
 
 
 ## API Management Version Compatibilty
-This artefact can be used with every API Management Plus version
+This artefact can be used with Axway API Management version 7.6.2 and higher
 
 ## Prerequisites
-- docker 17.06 (and docker-compose)
-- MQTT Broker   : activemq / rabbitmq / mosquitto / ...
-- Policy Engine : Axway API Gateway or custom engine (see [./tests/policy] )
+An Auth0 Account - https://manage.auth0.com
 
-## Configure your policy engine
-When AUTH_URL is set, every mqtt packet (CONNECT, SUBSCRIBE, PUBLISH in/out) are check against a [AUTH_API](./AUTH_API.md)
+## Configure Auth0
+The API-Management solution will use the Auth0 Management REST-API to integrate. This API is secured using OAuth. 
 
-See Axway API Gateway samples for mqtt in : `./api-gateway-policies/mqtt-proxy-apigw-policy.xml`
-In API Gateway Policy Studio, please use Import Configuration Fragment to upload the policy
+Logon to your Auth0 Management console and make sure you have selected the correct tenant in the upper right corner. 
+Now an application must be created, that corresponds to your API-Management solution and is used to access the Auth0 Management REST-API.
+Steps needed:
+ 1. Applications sections
+ 2. Create application
+ 3. Name it e.g. Axway API-Management
+ 4. Type: Machine to Machine app.
+ 5. Create
+ 6. Select Auth0 Management API
+ 7. Authorize (here you may restrict permissions of this application)
+ 8. In the settings tab please note the Client ID & Secret for later
 
-## Command-line / Environment options
-```sh
-docker run -it --rm mqtt-proxy davinci1976/mqtt-proxy mqtt-proxy --help
-```
+Later, when issuing access tokens, they will be issued only for a certain usage (audience) and this is named in Auth0 an API
 
-## Quickstart
-### Standalone (mqtt-proxy only)
-```sh
-   docker run -it --rm davinci1976/mqtt-proxy mqtt-proxy --auth-url http://apigtw:8065/mqtt --mqtt-broker-host my-mqtt-broker
-```
+ 1. APIs section
+ 2. Create API
+ 3. Give it a friendly name: e.g. "My APIs", meaning, that these tokens can only be used to access APIs on your API-Management platform
+ 4. Provide the Identifier: e.g. https://api.customer-name.com - Will be used to validate the token at API-Management runtime.
+ 5. Leave the default Signing Algorithm
 
-### Full environment (mqtt-proxy + broker + custom policy engine)
-```sh
-docker-compose -f docker-compose.yml up
-```
+With that, we are done with the basic Auth0 setup. More advanced configuration is not in scope of this document. 
 
-## Build standalone binary:
-Prerequisites : `golang`
-```sh
-make install-deps
-make
-```
+## Configure your API-Management solution
 
-## Build docker image
-Prerequisites : `docker 17.05`
 
-```
-docker build -t mqtt-proxy .
-```
--or-
-```
-make docker
-```
+## API-Portal
 
-## Test
-```
-make docker-test
-```
 
 ## Changelog
 - 0.0.4
@@ -77,19 +51,12 @@ make docker-test
   - Add HTTPS client support for authz/authn with added cert verification  
   - Remove the 2 steps build: use docker 17.05 build capability
 
-- 0.0.3
-  - Add websocket support `--http-host` `--http-port`
-  - rename `--mqtt-*` variables to `--mqtt-broker-*`
+- 0.0.1 - 06.09.2018
+  - Initial version
 
 
 ## Limitations/Caveats
-- No broker routing : Only one broker per mqtt-proxy instance
-  - no configurable routes
-- No TLS support for broker
-- No additional TLS options supported between the client and mqtt-proxy (algo, ....)
-- No HTTP API to publish a MQTT message on a topic `/topics/:topic?qos=:qos`
-   (like http://docs.aws.amazon.com/iot/latest/developerguide/protocols.html#http)
-- No cache for publish/receive/subscribe policy check
+- Nothing known
 
 ## Contributing
 
