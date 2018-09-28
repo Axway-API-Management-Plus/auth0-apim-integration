@@ -3126,25 +3126,18 @@
 	<fval name="adminEmail"><value>apiadmin@localhost</value></fval>
 	<fval name="adminName"><value>apiadmin</value></fval>
 	<fval name="adminPassword"><value></value></fval>
-	<fval name="apiregAuthenticationPolicies"><value contentType="reference">
-<key type='CircuitContainer'><id field='name' value='API-Manager'/><key type='FilterCircuit'><id field='name' value='Is Mockup?'/></key></key>	</value></fval>
+	<fval name="apiregAuthenticationPolicies"></fval>
 	<fval name="apiregFaultHandlerPolicies"><value contentType="reference">
 <key type='CircuitContainer'><id field='name' value='Generated Policies'/><key type='CircuitContainer'><id field='name' value='REST API&apos;s'/><key type='CircuitContainer'><id field='name' value='Templates'/><key type='FilterCircuit'><id field='name' value='Default Fault Handler'/></key></key></key></key>	</value></fval>
-	<fval name="apiregGlobalRequestPolicies"><value contentType="reference">
-<key type='CircuitContainer'><id field='name' value='API Keys'/><key type='FilterCircuit'><id field='name' value='Amazon V4 - ListUsers'/></key></key>	</value></fval>
-	<fval name="apiregGlobalResponsePolicies"><value contentType="reference">
-<key type='CircuitContainer'><id field='name' value='API Keys'/><key type='FilterCircuit'><id field='name' value='Amazon V2 - DescribeInstances'/></key></key>	</value></fval>
+	<fval name="apiregGlobalRequestPolicies"></fval>
+	<fval name="apiregGlobalResponsePolicies"></fval>
 	<fval name="apiregOAuthClientProfiles"><value contentType="reference">
 <key type='AuthProfilesGroup'><id field='name' value='Auth Profiles'/><key type='OAuthGroup'><id field='name' value='OAuth2'/><key type='OAuthProviderProfile'><id field='name' value='API Gateway'/><key type='OAuthAppProfile'><id field='name' value='Sample Client Authzcode App'/></key></key></key></key>	</value></fval>
 	<fval name="apiregOAuthTokenInfoPolicies"><value contentType="reference">
 <key type='CircuitContainer'><id field='name' value='Identity Provider'/><key type='CircuitContainer'><id field='name' value='Auth0'/><key type='FilterCircuit'><id field='name' value='Auth0 - Validate Token'/></key></key></key>	</value></fval>
-	<fval name="apiregOAuthTokenStores"><value contentType="reference">
-<key type='OAuth2StoresGroup'><id field='name' value='OAuth2 Stores'/><key type='AccessTokenStoreGroup'><id field='name' value='Access Token Stores'/><key type='AccessTokenPersist'><id field='name' value='OAuth Access Token Store'/></key></key></key>	</value></fval>
-	<fval name="apiregRequestPolicies"><value contentType="reference">
-<key type='CircuitContainer'><id field='name' value='API Manager Policies'/><key type='FilterCircuit'><id field='name' value='API Manager Protection Policy'/></key></key>	</value></fval>
+	<fval name="apiregOAuthTokenStores"></fval>
 	<fval name="apiregResponsePolicies"></fval>
-	<fval name="apiregRoutingPolicies"><value contentType="reference">
-<key type='CircuitContainer'><id field='name' value='API-Manager'/><key type='FilterCircuit'><id field='name' value='MainRoutingPolicy'/></key></key>	</value></fval>
+	<fval name="apiregRoutingPolicies"></fval>
 	<fval name="applicationQuotaWarnThresholdPercent"><value>80</value></fval>
 	<fval name="asyncExecutorStopWaitMs"><value>5000</value></fval>
 	<fval name="communityName"><value>Community</value></fval>
